@@ -18,14 +18,22 @@ import { ServerStyleSheets, ThemeProvider } from '@material-ui/styles'
 import theme from './../theme'
 
 //comment out before building for production
+<<<<<<< HEAD
 // import devBundle from './devBundle'
+=======
+//import devBundle from './devBundle'
+>>>>>>> 66a50f0cc10b84f3b44d261049a830ab3b9888a7
 
 const CURRENT_WORKING_DIR = process.cwd()
 const app = express()
 app.use('/', routes)
 
 //comment out before building for production
+<<<<<<< HEAD
 // devBundle.compile(app)
+=======
+//devBundle.compile(app)
+>>>>>>> 66a50f0cc10b84f3b44d261049a830ab3b9888a7
 
 // parse body params and attache them to req.body
 app.use(bodyParser.json())
