@@ -5,7 +5,7 @@ const config = {
     emailSettings:{
         from: "noreply@kiriikou.com"
     },
-    DB_URI: 'mongodb://localhost:27017/kiriikou-db',
+    DB_URI: 'mongodb+srv://Phinehas:Phinehas86@cluster0.1gctm.mongodb.net/kiriikou-ecommerce?retryWrites=true&w=majority',
     APP_NAME:'Kiriikou',
     SERVER_NAME:'KIRIIKOU-API',
     SERVER_VERSION:'1.0.0',
