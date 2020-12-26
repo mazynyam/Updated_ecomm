@@ -1,6 +1,6 @@
 const signin = async (user) => {
     try {
-      let response = await fetch('/api/v1/auth/login', {
+      let response = await fetch('/auth/signin/', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',

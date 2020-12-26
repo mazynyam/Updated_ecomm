@@ -51,53 +51,54 @@ const useStyles = makeStyles(theme => ({
     cursor:'pointer'
   }
 }))
+
 export default function Categories(props){
-    const classes = useStyles()
-    const [products, setProducts] = useState([])
-    const [selected, setSelected] = useState(props.categories[0])
-  
-    useEffect(() => {
-      const abortController = new AbortController()
-      // const signal = abortController.signal
-  
-      list({
-        category: props.categories[0]
-      }).then((data) => {
-        if (data) {
-          // console.log(data)
-        } else {
-          setProducts(data)
-        }
-      })
-      return function cleanup(){
-        abortController.abort()
+  const classes = useStyles()
+  const [products, setProducts] = useState([])
+  const [selected, setSelected] = useState(props.categories[0])
+
+  useEffect(() => {
+    const abortController = new AbortController()
+    const signal = abortController.signal
+
+    list({
+      category: props.categories[0]
+    }).then((data) => {
+      if (data.error) {
+        console.log(data.error)
+      } else {
+        setProducts(data)
       }
     })
-  
-    const listbyCategory = category => event => {
-      setSelected(category)
-      list({
-        category: category
-      }).then((data) => {
-        if (data.error) {
-          console.log(data.error)
-        } else {
-          setProducts(data)
-        }
-      })
+    return function cleanup(){
+      abortController.abort()
     }
-  
-      return (
-        <div>
+  }, [])
+
+  const listbyCategory = category => event => {
+    setSelected(category)
+    list({
+      category: category
+    }).then((data) => {
+      if (data.error) {
+        console.log(data.error)
+      } else {
+        setProducts(data)
+      }
+    })
+  }
+
+    return (
+      <div>
         <Card className={classes.card}>
           <Typography type="title" className={classes.title}>
-            Featured Products
+            Explore by category
           </Typography>
           <div className={classes.root}>
-            <GridList className={classes.gridList} cols={8}>
+            <GridList className={classes.gridList} cols={4}>
               {props.categories.map((tile, i) => (
-                <GridListTile key={i} className={classes.tileTitle} style={{height: '64px', backgroundColor: selected === tile? 'rgba(95, 139, 137, 0.56)':'rgba(95, 124, 139, 0.32)'}}>
-                  <span className={classes.link} onClick={listbyCategory(tile)}>{tile}  <Icon className={classes.icon}>{selected === tile && 'arrow_drop_down'}</Icon></span>
+                <GridListTile key={i} className={classes.tileTitle} style={{height: '64px', backgroundColor: selected == tile? 'rgba(95, 139, 137, 0.56)':'rgba(95, 124, 139, 0.32)'}}>
+                  <span className={classes.link} onClick={listbyCategory(tile)}>{tile}  <Icon className={classes.icon}>{selected == tile && 'arrow_drop_down'}</Icon></span>
                 </GridListTile>
               ))}
             </GridList>
@@ -106,9 +107,8 @@ export default function Categories(props){
           <Products products={products} searched={false}/>
         </Card>
       </div>
-      )
+    )
 }
-
-Categories.propsTypes = {
-    categories: PropTypes.array.isRequired
+Categories.propTypes = {
+  categories: PropTypes.array.isRequired
 }

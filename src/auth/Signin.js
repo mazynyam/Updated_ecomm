@@ -45,6 +45,7 @@ export default function Signin(props) {
     error: '',
     redirectToReferrer: false
   })
+  const name = 'Sign In';
 
   const clickSubmit = () => {
     const user = {

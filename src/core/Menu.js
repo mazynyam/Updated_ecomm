@@ -1,26 +1,24 @@
-import React, { useState, useEffect} from 'react';
-// import PropTypes from 'prop-types'
-import { fade, makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
+import React, { useState, useEffect} from 'react'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
+import InputBase from '@material-ui/core/InputBase'
 import Button from '@material-ui/core/Button'
-import Badge from '@material-ui/core/Badge';
+import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
+
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import {auth} from './../auth/auth-helper'
+import auth from './../auth/auth-helper'
 import {Link, withRouter} from 'react-router-dom'
+import CartIcon from '@material-ui/icons/ShoppingCart'
+import Badge from '@material-ui/core/Badge'
+import cart from './../cart/cart-helper'
 import logo from './../assets/images/kik.png';
-// import Search from './../product/Search'
-import {  list, listCategories } from './../product/api-product'
-// import Products from './../product/Products'
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -89,71 +87,20 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-const  isActive = (history, path) =>{
-    if(history.location.pathname.includes(path))
-    return { color: '#bef67a'}
-    else{
-        return { color: '#d7ff9a'}
-    }
+const isActive = (history, path) => {
+  if (history.location.pathname == path)
+    return {color: '#bef67a'}
+  else
+    return {color: '#ffffff'}
 }
 const isPartActive = (history, path) => {
-    if (history.location.pathname.includes(path))
-      return {color: '#bef67a'}
-    else
-      return {color: '#bef67a'}
-    
+  if (history.location.pathname.includes(path))
+    return {color: '#bef67a'}
+  else
+    return {color: '#ffffff'}
 }
-/**
- * @todo implement User role on the appbar
- */
-
-
 const Header = withRouter(({history}) =>{
   
-  const [categories, setCategories] = useState([])
-  useEffect(() => {
-    const abortController = new AbortController()
-    const signal = abortController.signal
-    listCategories(signal).then((data) =>{
-        setCategories(data)
-    })
-    return function cleanup() {
-      abortController.abort()
-    }
-  }, [])
-  
-
-  const [values, setValues] = useState({
-    category: '',
-    search: '',
-    results: [],
-    searched: false
-    })
-    const handleChange = name => event => {
-      setValues({
-        ...values, [name]: event.target.value,
-      })
-    }
-    const search = () => {
-      if(values.search){
-        list({
-          search: values.search || undefined, category: values.category
-        }).then((data) => {
-          if (data.error) {
-            console.log(data.error)
-          } else {
-            setValues({...values, results: data, searched:true})
-          }
-        })
-      }
-    }
-    const enterKey = (event) => {
-      if(event.keyCode === 13){
-        event.preventDefault()
-        search()
-      }
-    }
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -284,25 +231,10 @@ const Header = withRouter(({history}) =>{
             <Typography className={classes.title} variant="h6" noWrap>
               <Link to='/' className={classes.textColor}>
               <img src={logo} alt='Logo' height='50'  />
-              Kiriikou.com
+              Kiriikou
               </Link>
             </Typography>
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon onClick={search} />
-                
-              </div>
-              <InputBase
-                placeholder="Search…"
-                onKeyDown={enterKey}
-                onChange={handleChange('search')}
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </div>
+            
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
             {
@@ -370,11 +302,5 @@ const Header = withRouter(({history}) =>{
 })
 
 export default Header;
-
-
-
-
-
-
 
 

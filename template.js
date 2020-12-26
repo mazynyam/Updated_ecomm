@@ -1,9 +1,9 @@
-export default ({markup, css}) => {
+export default ({markup, css, name}) => {
     return `<!doctype html>
       <html lang="en">
         <head>
           <meta charset="utf-8">
-          <title>Kiriikou | </title>
+          <title>Kiriikou | ${name} </title>
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400">
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
           <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">

@@ -10,12 +10,12 @@ import SearchIcon from '@material-ui/icons/Search'
 import {list} from './api-product.js'
 import Products from './Products'
 
-
 const useStyles = makeStyles(theme => ({
   card: {
     margin: 'auto',
     textAlign: 'center',
-    backgroundColor: 'transparent'
+    paddingTop: 10,
+    backgroundColor: '#80808024'
   },
   menu: {
     width: 200,
@@ -25,15 +25,13 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1),
     width: 130,
     verticalAlign: 'bottom',
-    marginBottom: '20px',
-    
+    marginBottom: '20px'
   },
   searchField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: 300,
-    marginBottom: '20px',
-    color:'#fff'
+    marginBottom: '20px'
   },
   searchButton: {
     minWidth: '20px',
@@ -42,42 +40,42 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '20px'
   }
 }))
-export default function Search(props) {
-   const classes = useStyles()
 
-    const [values, setValues] = useState({
-        category: '',
-        search: '',
-        results: [],
-        searched: false
+export default function Search(props) {
+  const classes = useStyles()
+  const [values, setValues] = useState({
+      category: '',
+      search: '',
+      results: [],
+      searched: false
+  })
+  const handleChange = name => event => {
+    setValues({
+      ...values, [name]: event.target.value,
     })
-    const handleChange = name => event => {
-      setValues({
-        ...values, [name]: event.target.value,
+  }
+  const search = () => {
+    if(values.search){
+      list({
+        search: values.search || undefined, category: values.category
+      }).then((data) => {
+        if (data.error) {
+          console.log(data.error)
+        } else {
+          setValues({...values, results: data, searched:true})
+        }
       })
     }
-    const search = () => {
-      if(values.search){
-        list({
-          search: values.search || undefined, category: values.category
-        }).then((data) => {
-          if (data.error) {
-            console.log(data.error)
-          } else {
-            setValues({...values, results: data, searched:true})
-          }
-        })
-      }
+  }
+  const enterKey = (event) => {
+    if(event.keyCode == 13){
+      event.preventDefault()
+      search()
     }
-    const enterKey = (event) => {
-      if(event.keyCode === 13){
-        event.preventDefault()
-        search()
-      }
-    }
-return (
-     <div>
-        <Card className={classes.card} spacing={2}>
+  }
+    return (
+      <div>
+        <Card className={classes.card}>
           <TextField
             id="select-category"
             select
@@ -116,8 +114,8 @@ return (
           <Products products={values.results} searched={values.searched}/>
         </Card>
       </div>
-) 
+    )
 }
 Search.propTypes = {
-    categories: PropTypes.array.isRequired
+  categories: PropTypes.array.isRequired
 }

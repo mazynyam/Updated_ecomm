@@ -49,7 +49,7 @@ export default function EditProfile({ match }) {
       name: '',
       email: '',
       password: '',
-      hasShop: false,
+      seller: false,
       redirectToProfile: false,
       error: ''
   })
@@ -64,7 +64,7 @@ export default function EditProfile({ match }) {
       if (data && data.error) {
         setValues({...values, error: data.error})
       } else {
-        setValues({...values, name: data.name, email: data.email, hasShop: data.hasShop})
+        setValues({...values, name: data.name, email: data.email, seller: data.seller})
       }
     })
     return function cleanup(){
@@ -78,7 +78,7 @@ export default function EditProfile({ match }) {
       name: values.name || undefined,
       email: values.email || undefined,
       password: values.password || undefined,
-      hasShop: values.hasShop || undefined
+      seller: values.seller || undefined
     }
     update({
       userId: match.params.userId
@@ -98,7 +98,7 @@ export default function EditProfile({ match }) {
     setValues({...values, [name]: event.target.value})
   }
   const handleCheck = (event, checked) => {
-    setValues({...values, 'hasShop': checked})
+    setValues({...values, 'seller': checked})
   }
 
   if (values.redirectToProfile) {
@@ -122,10 +122,10 @@ export default function EditProfile({ match }) {
                                 checked: classes.checked,
                                 bar: classes.bar,
                               }}
-                      checked={values.hasShop}
+                      checked={values.seller}
                       onChange={handleCheck}
               />}
-            label={values.hasShop? 'Active' : 'Inactive'}
+            label={values.seller? 'Active' : 'Inactive'}
           />
           <br/> {
             values.error && (<Typography component="p" color="error">
