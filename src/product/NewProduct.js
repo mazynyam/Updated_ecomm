@@ -51,11 +51,13 @@ export default function NewProduct({match}) {
       name: '',
       description: '',
       image: '',
+      video:'',
       category: '',
       quantity: '',
       price: '',
+      sku:'',
       redirect: false,
-      error: ''
+      error: '',
   })
   const jwt = auth.isAuthenticated()
   const handleChange = name => event => {
@@ -69,9 +71,11 @@ export default function NewProduct({match}) {
     values.name && productData.append('name', values.name)
     values.description && productData.append('description', values.description)
     values.image && productData.append('image', values.image)
+    values.video && productData.append('video', values.video)
     values.category && productData.append('category', values.category)
     values.quantity && productData.append('quantity', values.quantity)
     values.price && productData.append('price', values.price)
+    values.sku && productData.append('sku', values.sku)
 
     create({
       shopId: match.params.shopId
@@ -98,10 +102,10 @@ export default function NewProduct({match}) {
           <input accept="image/*" onChange={handleChange('image')} className={classes.input} id="icon-button-file" type="file"/>
           <label htmlFor="icon-button-file">
             <Button variant="contained" color="secondary" component="span">
-              Upload Photo
+              Upload Image or Video
               <FileUpload/>
             </Button>
-          </label> <span className={classes.filename}>{values.image ? values.image.name : ''}</span><br/>
+          </label> <span className={classes.filename}>{values.image || values.video ? values.image.name || values.video.name : ''}</span><br/>
           <TextField id="name" label="Name" className={classes.textField} value={values.name} onChange={handleChange('name')} margin="normal"/><br/>
           <TextField
             id="multiline-flexible"
@@ -116,6 +120,7 @@ export default function NewProduct({match}) {
           <TextField id="category" label="Category" className={classes.textField} value={values.category} onChange={handleChange('category')} margin="normal"/><br/>
           <TextField id="quantity" label="Quantity" className={classes.textField} value={values.quantity} onChange={handleChange('quantity')} type="number" margin="normal"/><br/>
           <TextField id="price" label="Price" className={classes.textField} value={values.price} onChange={handleChange('price')} type="number" margin="normal"/><br/>
+          <TextField id="sku" label="Sku" className={classes.textField} value={values.sku} onChange={handleChange('sku')} type="text" margin="normal"/><br/>
           {
             values.error && (<Typography component="p" color="error">
               <Icon color="error" className={classes.error}>error</Icon>

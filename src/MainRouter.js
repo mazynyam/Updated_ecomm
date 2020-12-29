@@ -22,6 +22,7 @@ import StripeConnect from './user/StripeConnect'
 import ShopOrders from './order/ShopOrders'
 import Order from './order/Order'
 import AdminHome from './admin/AdminHome'
+import Footer from './core/Footer'
 
 const MainRouter = () => {
   const name = 'Sign Up';
@@ -53,6 +54,9 @@ const MainRouter = () => {
 
         <Route path="/seller/stripe/connect" component={StripeConnect}/>
       </Switch>
+      <div id="sitewrapper" >
+          <Footer/>
+      </div>
     </div>)
 }
 

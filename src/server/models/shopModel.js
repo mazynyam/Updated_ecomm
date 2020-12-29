@@ -59,6 +59,10 @@ const ShopSchema = new mongoose.Schema({
         data:Buffer,
         contentType:String
     },
+    image:{
+        data:Buffer,
+        contentType:String
+    },
     rate: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
     comments: [{
         text: String,

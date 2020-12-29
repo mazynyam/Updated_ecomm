@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import Card from '@material-ui/core/Card'
-// import CardActions from '@material-ui/core/CardActions'
+import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import FileUpload from '@material-ui/icons/AddPhotoAlternate'
@@ -84,7 +84,7 @@ export default function NewBusiness(){
         setValues({...values, 'is_business_registered': checked})
       }
     const clickSubmit = () => {
-        const businessData  = new FormData()
+        let businessData  = new FormData()
         values.business_name && businessData.append('business_name', values.business_name)
         values.region_of_business && businessData.append('region_of_business', values.region_of_business)
         values.city_of_business && businessData.append('city_of_business', values.city_of_business)
@@ -98,7 +98,6 @@ export default function NewBusiness(){
         values.identity_card_back && businessData.append('identity_card_back', values.identity_card_back)
         create({
            userId: jwt.user._id
-           
         }, {
             t: jwt.token
         }, businessData).then((data) => {
@@ -110,100 +109,18 @@ export default function NewBusiness(){
             }
         })
     }
-    const next = () => {
-        let currentStep = values.currentStep
-        currentStep = currentStep >= 2 ? 3: currentStep + 1
-        setValues({
-            currentStep: currentStep
-        })
+ 
+   
+    
+  
+    if(values.redirect){
+        return <Redirect to={'/seller/shops'} /> 
     }
-    const prev = () => {
-        let currentStep = values.currentStep
-        currentStep = currentStep <= 1 ? 1 : currentStep - 1
-        setValues({
-            currentStep: currentStep
-        })
-    }
-    const prevButton = () =>{
-        let currentStep = values.currentStep
-        if(currentStep !== 1){
-            return (
-                <Button color='secondary' className='float-left' type='button' onClick={prev}>Previous</Button>
-            )
-        }
-        return null;
-    }
-    const nextButton = () =>{
-        let currentStep = values.currentStep
-        if(currentStep < 2){
-            return (
-                <Button color='primary' className='float-right' type='button' onClick={next}>Next</Button>
-            )
-        }
-        return null;
-    }
-    // const UserInfo = ()=>{
-    //     if (values.currentStep !== 1) {
-    //         return null
-    //       } 
-    //       return(
-    //           <div>
-    //               <Typography component='h3'>Personal User Information</Typography>
-                
-    //             <TextField type="text" id="firstname" name="firstname" label='Firstname' className={classes.textField}
-    //                         value={values.firstname}
-    //                         onChange={handleChange('firstname')} required />
-               
-               
-    //             <TextField type="text" id="lastname" name="lastname" label='Lastname' className={classes.textField}
-    //                         value={values.lastname}
-    //                         onChange={handleChange('lastname')} required />
-               
-              
-    //             <TextField type="email" id="email" name="email" label='Email' className={classes.textField}
-    //                         value={values.email}
-    //                         onChange={handleChange('email')} required />
-               
-                
-    //             <TextField type="password" id="password" name="password" label='Password' className={classes.textField}
-    //                         value={values.password}
-    //                         onChange={handleChange('password')} required />
-                
-    //             <TextField type="text" id="country" name="country" label='Country' className={classes.textField}
-    //                         value={values.country}
-    //                         onChange={handleChange('country')} required />
-                
-    //             <TextField type="text" id="region" name="region" label='Region' className={classes.textField}
-    //                         value={values.region}
-    //                         onChange={handleChange('region')} required />
-              
-    //                 <TextField type="text" id="suburb" name="suburb" label='Suburb' className={classes.textField}
-    //                         value={values.suburb}
-    //                         onChange={handleChange('suburb')} required />
-               
-    //                 <TextField type="text" id="zip" name="zip" label='Zip' className={classes.textField}
-    //                         value={values.zip}
-    //                         onChange={handleChange('zip')}  />
-               
-    //                 <TextField type="text" id="phone_one" name="phone_one" label='Contact' className={classes.textField}
-    //                         value={values.phone_one}
-    //                         onChange={handleChange('phone_one')} required />
-                
-    //                 <TextField type="text" id="phone_two" name="phone_two" label='Other Phone' className={classes.textField}
-    //                         value={values.phone_two}
-    //                         onChange={handleChange('phone_two')}  />
-               
-    //           </div>
-    //       );
-    // }
-    const BusinessInfo = () =>{
-        if (values.currentStep !== 1) {
-            return null
-          } 
-          return(
-              <div>
-                  <Typography>Business Information</Typography>
-                
+    return (
+        <div>
+        <Card className={classes.card}>
+            <CardContent>
+                <Typography type='headline' component='h2' className={classes.title}>New Shop Registration</Typography>
                 <TextField type="text" id="business_name" name="business_name" label='Business Name' className={classes.textField}
                             value={values.business_name}
                             onChange={handleChange('business_name')}
@@ -238,32 +155,19 @@ export default function NewBusiness(){
                     <TextField type="email" id="business_email" name="business_email" label='Business Email' className={classes.textField}
                             value={values.business_email}
                             onChange={handleChange('business_email')} required />
-                
-                </div>
-          )}
-    const BusinessDocument = () =>{
-        if (values.currentStep !== 2) {
-            return null
-          } 
-        return (
-            <div>
-                <Typography>
-                    Business Document Upload
-                </Typography>
-                <Typography variant="subtitle1" className={classes.subheading}>
-                Is Business Registered?
-            </Typography>
-            <FormControlLabel
-                control={
-                <Switch classes={{
-                                    checked: classes.checked,
-                                    bar: classes.bar,
-                                }}
-                        checked={values.is_business_registered}
-                        onChange={handleCheck}
-                />}
-                label={values.is_business_registered ? 'Registered' : 'Not Registered'}
-            />
+                            <br />
+                <Typography>Is Business Registered?</Typography>
+                <FormControlLabel
+                    control={
+                    <Switch classes={{
+                                        checked: classes.checked,
+                                        bar: classes.bar,
+                                    }}
+                            checked={values.is_business_registered}
+                            onChange={handleCheck}
+                    />}
+                    label={values.is_business_registered ? 'Registered' : 'Not Registered'}
+                />
                 { values.is_business_registered === true && (
                     <div>
                         <input accept="image/*" onChange={handleChange('business_certificate')} className={classes.input} id="icon-button-file" type="file" />
@@ -279,7 +183,7 @@ export default function NewBusiness(){
                 {
                     !values.is_business_registered && (
                         <div>
-                            <input accept="image/*" onChange={handleChange('identity_card_front')} className={classes.input} id="icon-button-file" type="file" />
+                            <input accept="image/*" onChange={handleChange('identity_card_front')} className={classes.input} id="icon-button-file-front" type="file" />
                             <label htmlFor="icon-button-file">
                                 <Button variant="contained" color="secondary" component="span">
                                 Upload an Identity Card Front
@@ -287,7 +191,7 @@ export default function NewBusiness(){
                                 </Button>
                             </label> <span className={classes.filename}>{values.identity_card_front ? values.identity_card_front.name : ''}</span><br/>
                             
-                            <input accept="image/*" onChange={handleChange('identity_card_front')} className={classes.input} id="icon-button-file" type="file" />
+                            <input accept="image/*" onChange={handleChange('identity_card_back')} className={classes.input} id="icon-button-file-back" type="file" />
                             <label htmlFor="icon-button-file">
                                 <Button variant="contained" color="secondary" component="span">
                                 Upload an Identity Card Back
@@ -305,47 +209,15 @@ export default function NewBusiness(){
                     {values.error}
                     </Typography>)
                 }
-                <div className='btngroup'>
-                    <Button color="primary" variant="contained" onClick={clickSubmit} className={classes.submit}>Submit</Button>
-                    <Link to='/' className={classes.submit}><Button variant="contained">Cancel</Button></Link>
-                </div>
-            </div>
-        )
-        
-    }
-    if(values.redirect){
-        return <Redirect to={'/auth/business/signin'} /> 
-    }
-    return (
-        <div>
-        <Card className={classes.card}>
-            <CardContent>
-                <Typography type='headline' component='h2' className={classes.title}>New Shop Registration</Typography>
-                <p>Step {values.currentStep}</p>
-                <br />
-                {/* <UserInfo /> */}
-                <BusinessInfo />
-                <BusinessDocument />
-                {prevButton()}
-                {nextButton()}
+               
             </CardContent>
+            <CardActions>
+                    <Button color="primary" variant="contained" onClick={clickSubmit} className={classes.submit}>Submit</Button>
+                    <Link to='/seller/shops' className={classes.submit}><Button variant="contained">Cancel</Button></Link>     
+            </CardActions>
 
         </Card>
-        <Dialog open={values.open} disableBackdropClick={true}>
-            <DialogTitle>New Account</DialogTitle>
-            <DialogContent>
-            <DialogContentText>
-                New account successfully created.
-            </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-            <Link to="/auth/signin">
-                <Button color="primary" autoFocus="autoFocus" variant="contained">
-                Sign In
-                </Button>
-            </Link>
-            </DialogActions>
-        </Dialog>
         </div>
-    )
+        )
+
 }

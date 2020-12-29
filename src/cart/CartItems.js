@@ -170,7 +170,7 @@ export default function CartItems (props) {
           {!props.checkout && (auth.isAuthenticated()?
             <Button color="secondary" variant="contained" onClick={openCheckout}>Checkout</Button>
             :
-            <Link to="/signin">
+            <Link to="/auth/signin">
               <Button color="primary" variant="contained">Sign in to checkout</Button>
             </Link>)}
           <Link to='/' className={classes.continueBtn}>

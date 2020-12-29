@@ -20,6 +20,10 @@ const create = (req, res, next) => {
       product.image.data = fs.readFileSync(files.image.path)
       product.image.contentType = files.image.type
     }
+    if(files.video){
+      product.video.data = fs.readFileSync(files.video.path)
+      product.video.contentType = files.video.type
+    }
     try {
       let result = await product.save()
       res.json(result)

@@ -9,6 +9,10 @@ const ProductSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String
   },
+  video:{
+    data:Buffer,
+    contentType:String
+  },
   description: {
     type: String,
     trim: true
@@ -23,6 +27,9 @@ const ProductSchema = new mongoose.Schema({
   price: {
     type: Number,
     required: "Price is required"
+  },
+  sku:{
+    type:String,
   },
   updated: Date,
   created: {

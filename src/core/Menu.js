@@ -89,13 +89,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 const isActive = (history, path) => {
   if (history.location.pathname == path)
-    return {color: '#bef67a'}
+    return {color: '#DAFF31'}
   else
     return {color: '#ffffff'}
 }
 const isPartActive = (history, path) => {
   if (history.location.pathname.includes(path))
-    return {color: '#bef67a'}
+    return {color: '#DAFF31'}
   else
     return {color: '#ffffff'}
 }
@@ -226,14 +226,16 @@ const Header = withRouter(({history}) =>{
               color="inherit"
               aria-label="open drawer"
             >
-              <MenuIcon />
+              {/* <MenuIcon /> */}
             </IconButton>
+            <div style={{'display':'flex'}}>
             <Typography className={classes.title} variant="h6" noWrap>
-              <Link to='/' className={classes.textColor}>
               <img src={logo} alt='Logo' height='50'  />
+              <Link to='/' className={classes.textColor}>
               Kiriikou
               </Link>
             </Typography>
+            </div>
             
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
@@ -258,24 +260,21 @@ const Header = withRouter(({history}) =>{
                     <Button style={isActive(history, "/user/" + auth.isAuthenticated().user._id)}>{auth.isAuthenticated().user.name}</Button>
                   </Link>
                   
-                     {/* <IconButton
-                      edge="end"
-                      aria-label="account of current user"
-                      aria-controls={menuId}
-                      aria-haspopup="true"
-                      onClick={handleProfileMenuOpen}
-                      color="inherit"
-                    >
-                      <AccountCircle />
-                      
-                    </IconButton> */}
-                    <Link to="/business/register/new">
-                      <Button style={isActive(history, "/business/register/new")}>Connect to Kiriikou
-                      </Button>
-                    </Link>
+                     
+                    
                     <Button color="inherit" onClick={() => {
                       auth.clearJWT(() => history.push('/'))
                     }}>Sign out</Button>
+                </span>)
+              }
+          {
+                auth.isAuthenticated() &&  !auth.isAuthenticated().user.seller && (<span>
+
+                    <Link to="/business/register/new">
+                        <Button style={isActive(history, "/business/register/new")}>Connect to Kiriikou
+                      </Button>
+                    </Link>
+                   
                 </span>)
               }
          

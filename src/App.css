@@ -1,7 +1,7 @@
 .sitewrapper {
-  /* position: absolute; */
+  position: absolute;
   /* bottom: 8px; */
-  right: 0px;
+  /* right: 0px; */
   width: 100%;
 }
 
@@ -20,6 +20,9 @@ svg{
   cursor:pointer;
 }
 Link{
+  text-decoration: none;
+}
+a{
   text-decoration: none;
 }
 .btngroup{

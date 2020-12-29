@@ -39,10 +39,10 @@ export default function DeleteShop(props) {
       </IconButton>
 
       <Dialog open={open} onClose={handleRequestClose}>
-        <DialogTitle>{"Delete "+props.shop.name}</DialogTitle>
+        <DialogTitle>{"Delete "+props.shop.business_name}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Confirm to delete your shop {props.shop.name}.
+            Confirm to delete your shop {props.shop.business_name}.
           </DialogContentText>
         </DialogContent>
         <DialogActions>

@@ -7,6 +7,9 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import Icon from '@material-ui/core/Icon'
 import Avatar from '@material-ui/core/Avatar'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Switch from '@material-ui/core/Switch'
+
 import auth from './../auth/auth-helper'
 import FileUpload from '@material-ui/icons/AddPhotoAlternate'
 import { makeStyles } from '@material-ui/core/styles'
@@ -14,6 +17,7 @@ import {read, update} from './api-shop.js'
 import {Redirect} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import MyProducts from './../product/MyProducts'
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -61,12 +65,21 @@ const useStyles = makeStyles(theme => ({
 export default function EditShop ({match}) {
   const classes = useStyles()
   const [values, setValues] = useState({
-      name: '',
-      description: '',
-      image: '',
-      redirect: false,
-      error: '',
-      id: ''
+    business_name:'',
+    region_of_business:'',
+    city_of_business:'',
+    business_mobile:'',
+    business_mobile_contact:'',
+    country_of_business:'',
+    business_email:'',
+    is_business_registered:false,
+    business_certificate:'',
+    identity_card_front:'',
+    identity_card_back:'',
+    image: '',
+    redirect: false,
+    error: '',
+    id: ''
   })
   const jwt = auth.isAuthenticated()
   useEffect(() => {
@@ -85,11 +98,22 @@ export default function EditShop ({match}) {
       abortController.abort()
     }
   }, [])
-
+  const handleCheck = (event, checked) => {
+    setValues({...values, 'is_business_registered': checked})
+  }
   const clickSubmit = () => {
     let shopData = new FormData()
-    values.name && shopData.append('name', values.name)
-    values.description && shopData.append('description', values.description)
+    values.business_name && shopData.append('business_name', values.business_name)
+    values.region_of_business && shopData.append('region_of_business', values.region_of_business)
+    values.city_of_business && shopData.append('city_of_business', values.city_of_business)
+    values.business_mobile && shopData.append('business_mobile', values.business_mobile)
+    values.business_mobile_contact && shopData.append('business_mobile_contact', values.business_mobile_contact)
+    values.country_of_business && shopData.append('country_of_business', values.country_of_business)
+    values.business_email && shopData.append('business_email', values.business_email)
+    values.is_business_registered && shopData.append('is_business_registered', values.is_business_registered)
+    values.business_certificate && shopData.append('business_certificate', values.business_certificate)
+    values.identity_card_front && shopData.append('identity_card_front', values.identity_card_front)
+    values.identity_card_back && shopData.append('identity_card_back', values.identity_card_back)  
     values.image && shopData.append('image', values.image)
     update({
       shopId: match.params.shopId
@@ -133,26 +157,87 @@ export default function EditShop ({match}) {
                   <FileUpload/>
                 </Button>
               </label> <span className={classes.filename}>{values.image ? values.image.name : ''}</span><br/>
-              <TextField id="name" label="Name" className={classes.textField} value={values.name} onChange={handleChange('name')} margin="normal"/><br/>
-              <TextField
-                id="multiline-flexible"
-                label="Description"
-                multiline
-                rows="3"
-                value={values.description}
-                onChange={handleChange('description')}
-                className={classes.textField}
-                margin="normal"
-              /><br/>
-              <Typography type="subheading" component="h4" className={classes.subheading}>
-                Owner: {values.owner}
-              </Typography><br/>
-              {
-                values.error && (<Typography component="p" color="error">
-                    <Icon color="error" className={classes.error}>error</Icon>
-                    {values.error}
-                  </Typography>)
-              }
+              <TextField type="text" id="business_name" name="business_name" label='Business Name' className={classes.textField}
+                            value={values.business_name}
+                            onChange={handleChange('business_name')}
+                             required />
+                
+               
+                <TextField type="text" id="region_of_business" name="region_of_business" label='Region' className={classes.textField}
+                            value={values.region_of_business}
+                            onChange={handleChange('region_of_business')} required />
+               
+               
+                    <TextField type="text" id="city_of_business" name="city_of_business" label='City' className={classes.textField}
+                            value={values.city_of_business}
+                            onChange={handleChange('city_of_business')} required />
+                
+                
+                    <TextField type="text" id="business_mobile" name="business_mobile" label='Business Contact' className={classes.textField}
+                            value={values.business_mobile}
+                            onChange={handleChange('business_mobile')} required />
+                
+                
+                    <TextField type="text" id="business_mobile_contact" name="business_mobile_contact" label='Business Alt Contact' className={classes.textField}
+                            value={values.business_mobile_contact}
+                            onChange={handleChange('business_mobile_contact')}  />
+                
+                
+                    <TextField type="text" id="country_of_business" name="country_of_business" label='Country' className={classes.textField}
+                            value={values.country_of_business}
+                            onChange={handleChange('country_of_business')} required />
+               
+                
+                    <TextField type="email" id="business_email" name="business_email" label='Business Email' className={classes.textField}
+                            value={values.business_email}
+                            onChange={handleChange('business_email')} required />
+                            <br />
+                <Typography>Is Business Registered?</Typography>
+                <FormControlLabel
+                    control={
+                    <Switch classes={{
+                                        checked: classes.checked,
+                                        bar: classes.bar,
+                                    }}
+                            checked={values.is_business_registered}
+                            onChange={handleCheck}
+                    />}
+                    label={values.is_business_registered ? 'Registered' : 'Not Registered'}
+                />
+                { values.is_business_registered === true && (
+                    <div>
+                        <input accept="image/*" onChange={handleChange('business_certificate')} className={classes.input} id="icon-button-file" type="file" />
+                        <label htmlFor="icon-button-file">
+                            <Button variant="contained" color="secondary" component="span">
+                            Upload Business Certificate
+                            <FileUpload/>
+                            </Button>
+                        </label> <span className={classes.filename}>{values.business_certificate ? values.business_certificate.name : ''}</span><br/>
+                    </div>
+                )
+                }
+                {
+                    !values.is_business_registered && (
+                        <div>
+                            <input accept="image/*" onChange={handleChange('identity_card_front')} className={classes.input} id="icon-button-file-front" type="file" />
+                            <label htmlFor="icon-button-file">
+                                <Button variant="contained" color="secondary" component="span">
+                                Upload an Identity Card Front
+                                <FileUpload/>
+                                </Button>
+                            </label> <span className={classes.filename}>{values.identity_card_front ? values.identity_card_front.name : ''}</span><br/>
+                            
+                            <input accept="image/*" onChange={handleChange('identity_card_back')} className={classes.input} id="icon-button-file-back" type="file" />
+                            <label htmlFor="icon-button-file">
+                                <Button variant="contained" color="secondary" component="span">
+                                Upload an Identity Card Back
+                                <FileUpload/>
+                                </Button>
+                            </label> <span className={classes.filename}>{values.identity_card_back ? values.identity_card_back.name : ''}</span><br/>
+
+                        </div>
+                    )
+                }
             </CardContent>
             <CardActions>
               <Button color="primary" variant="contained" onClick={clickSubmit} className={classes.submit}>Update</Button>

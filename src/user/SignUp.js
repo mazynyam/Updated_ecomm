@@ -47,7 +47,6 @@ export default function Signup() {
     name: '',
     password: '',
     email: '',
-    role: 'basic',
     phone: '',
     open: false,
     error: ''
@@ -62,7 +61,7 @@ export default function Signup() {
       name: values.name || undefined,
       email: values.email || undefined,
       password: values.password || undefined,
-      role: values.password || undefined,
+     
       phone: values.password || undefined
     }
     create(user).then((data) => {
