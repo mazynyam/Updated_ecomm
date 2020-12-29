@@ -25,7 +25,7 @@ import AdminHome from './admin/AdminHome'
 import Footer from './core/Footer'
 
 const MainRouter = () => {
-  const name = 'Sign Up';
+  
   return (<div>
       <Header/>
       <Switch>
