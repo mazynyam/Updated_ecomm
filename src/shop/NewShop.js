@@ -217,6 +217,21 @@ export default function NewBusiness(){
             </CardActions>
 
         </Card>
+        <Dialog open={values.open} disableBackdropClick={true}>
+        <DialogTitle>New Business Account</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+             Account successfully created.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Link to="/seller/shops">
+            <Button color="primary" autoFocus="autoFocus" variant="contained">
+              Go to Dashboard
+            </Button>
+          </Link>
+        </DialogActions>
+      </Dialog>
         </div>
         )
 
