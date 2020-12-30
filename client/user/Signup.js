@@ -51,7 +51,7 @@ export default function Signup() {
     open: false,
     error: ''
   })
-
+  const name = 'Signup';
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value })
   }

@@ -24,7 +24,8 @@ export default function Home(){
   const [animating, setAnimating] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
   const content = SLIDE_INFO;
-
+  const name = 'Home';
+  
   useEffect(() => {
     const abortController = new AbortController()
     const signal = abortController.signal

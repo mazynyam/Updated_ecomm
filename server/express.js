@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser'
 import compress from 'compression'
 import cors from 'cors'
 import helmet from 'helmet'
-import Template from '../../template'
+import Template from './../template'
 import userRoutes from './routes/user.routes'
 import authRoutes from './routes/auth.routes'
 import shopRoutes from './routes/shop.routes'
@@ -15,11 +15,11 @@ import orderRoutes from './routes/order.routes'
 // modules for server side rendering
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-import MainRouter from './../MainRouter'
+import MainRouter from './../client/MainRouter'
 import { StaticRouter } from 'react-router-dom'
 
 import { ServerStyleSheets, ThemeProvider } from '@material-ui/styles'
-import theme from './../theme'
+import theme from './../client/theme'
 //end
 
 //comment out before building for production
@@ -57,7 +57,7 @@ app.get('*', (req, res) => {
     sheets.collect(
       <StaticRouter location={req.url} context={context}>
           <ThemeProvider theme={theme}>
-            <MainRouter/>
+            <MainRouter />
           </ThemeProvider>
       </StaticRouter>
      )

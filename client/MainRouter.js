@@ -24,7 +24,7 @@ import Order from './order/Order'
 import AdminHome from './admin/AdminHome'
 import Footer from './core/Footer'
 
-const MainRouter = () => {
+const MainRouter = (props) => {
   
   return (<div>
       <Header/>
