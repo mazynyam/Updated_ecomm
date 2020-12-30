@@ -37,9 +37,7 @@
     "reactstrap": "^8.7.1",
     "request": "^2.88.2",
     "socket.io": "^2.3.0",
-    "stripe": "^8.129.0"
-  },
-  "devDependencies": {
+    "stripe": "^8.129.0",
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-react": "^7.9.4",
@@ -54,6 +52,7 @@
     "webpack-hot-middleware": "^2.25.0",
     "webpack-node-externals": "^1.7.2"
   },
+  
   "scripts": {
     "development": "nodemon",
     "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
