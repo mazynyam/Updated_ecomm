@@ -120,7 +120,7 @@ const listByShop = async (req, res) => {
 
 const listLatest = async (req, res) => {
   try {
-    let products = await Product.find({}).sort('-created').limit(5).populate('shop', '_id name').exec()
+    let products = await Product.find({}).sort('-created').limit(1).populate('shop', '_id name').exec()
     res.json(products)
   } catch (err){
     return res.status(400).json({

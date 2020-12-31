@@ -183,18 +183,18 @@ export default function NewBusiness(){
                 {
                     !values.is_business_registered && (
                         <div>
-                            <input accept="image/*" onChange={handleChange('identity_card_front')} className={classes.input} id="icon-button-file-front" type="file" />
+                            <input accept="image/*" onChange={handleChange('identity_card_front')} className={classes.input} id="icon-button-file" type="file" />
                             <label htmlFor="icon-button-file">
                                 <Button variant="contained" color="secondary" component="span">
-                                Upload an Identity Card Front
+                                Upload an ID Card Front
                                 <FileUpload/>
                                 </Button>
                             </label> <span className={classes.filename}>{values.identity_card_front ? values.identity_card_front.name : ''}</span><br/>
                             
-                            <input accept="image/*" onChange={handleChange('identity_card_back')} className={classes.input} id="icon-button-file-back" type="file" />
+                            <input accept="image/*" onChange={handleChange('identity_card_back')} className={classes.input} id="icon-button-file" type="file" />
                             <label htmlFor="icon-button-file">
                                 <Button variant="contained" color="secondary" component="span">
-                                Upload an Identity Card Back
+                                Upload an ID Card Back
                                 <FileUpload/>
                                 </Button>
                             </label> <span className={classes.filename}>{values.identity_card_back ? values.identity_card_back.name : ''}</span><br/>

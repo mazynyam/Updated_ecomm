@@ -128,7 +128,7 @@ export default function EditShop ({match}) {
     })
   }
   const handleChange = name => event => {
-    const value = name === 'image'
+    const value = name === 'image' || name === 'business_certificate' || name === 'identity_card_front' || name === 'identity_card_back'
       ? event.target.files[0]
       : event.target.value
     setValues({...values,  [name]: value })
@@ -208,29 +208,30 @@ export default function EditShop ({match}) {
                     <div>
                         <input accept="image/*" onChange={handleChange('business_certificate')} className={classes.input} id="icon-button-file" type="file" />
                         <label htmlFor="icon-button-file">
-                            <Button variant="contained" color="secondary" component="span">
+                          <Button variant="contained" color="default" component="span">
                             Upload Business Certificate
                             <FileUpload/>
-                            </Button>
-                        </label> <span className={classes.filename}>{values.business_certificate ? values.business_certificate.name : ''}</span><br/>
+                          </Button>
+              </label> <span className={classes.filename}>{values.business_certificate ? values.business_certificate.name : ''}</span><br/>
+              
                     </div>
                 )
                 }
                 {
                     !values.is_business_registered && (
                         <div>
-                            <input accept="image/*" onChange={handleChange('identity_card_front')} className={classes.input} id="icon-button-file-front" type="file" />
+                        <input accept="image/*" onChange={handleChange('identity_card_front')} className={classes.input} id="identity_card_front" type="file" />
                             <label htmlFor="icon-button-file">
-                                <Button variant="contained" color="secondary" component="span">
-                                Upload an Identity Card Front
+                              <Button variant="contained" color="secondary" component="span">
+                                Upload ID Card Front
                                 <FileUpload/>
-                                </Button>
+                              </Button>
                             </label> <span className={classes.filename}>{values.identity_card_front ? values.identity_card_front.name : ''}</span><br/>
                             
-                            <input accept="image/*" onChange={handleChange('identity_card_back')} className={classes.input} id="icon-button-file-back" type="file" />
+                            <input accept="image/*" onChange={handleChange('identity_card_back')} className={classes.input} id="identity_card_back" type="file" />
                             <label htmlFor="icon-button-file">
                                 <Button variant="contained" color="secondary" component="span">
-                                Upload an Identity Card Back
+                                Upload  ID Card Back
                                 <FileUpload/>
                                 </Button>
                             </label> <span className={classes.filename}>{values.identity_card_back ? values.identity_card_back.name : ''}</span><br/>

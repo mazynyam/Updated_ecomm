@@ -22,7 +22,7 @@ svg{
 Link{
   text-decoration: none;
 }
-a{
+a:hover{
   text-decoration: none;
 }
 .btngroup{
