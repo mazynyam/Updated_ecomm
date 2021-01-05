@@ -23,6 +23,7 @@ import logo from './../assets/images/kik.png';
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
+<<<<<<< HEAD
     height:'5px',
     
  
@@ -35,11 +36,14 @@ const useStyles = makeStyles((theme) => ({
     height:'33px',
     margin:"0px",
     
+=======
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   textColor:{
+<<<<<<< HEAD
     // color: ACD523,
     // listStyle:'none'
     color:' #acd523',
@@ -52,13 +56,20 @@ const useStyles = makeStyles((theme) => ({
        },
        width:'400px',
        
+=======
+    color:'#f4f4f4',
+    listStyle:'none'
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
   },
   title: {
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+<<<<<<< HEAD
     marginBottom:'24px',
+=======
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
   },
   search: {
     position: 'relative',
@@ -75,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
       width: 'auto',
     },
   },
+<<<<<<< HEAD
   logincolor:{
     
     color:' #acd523',
@@ -88,6 +100,9 @@ const useStyles = makeStyles((theme) => ({
   },
   searchIcon: {
     
+=======
+  searchIcon: {
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
     padding: theme.spacing(0, 2),
     height: '100%',
     position: 'absolute',
@@ -95,8 +110,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+<<<<<<< HEAD
     color:'#ACD523',
    
+=======
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
   },
   inputRoot: {
     color: 'inherit',
@@ -126,6 +144,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const isActive = (history, path) => {
   if (history.location.pathname == path)
+<<<<<<< HEAD
   return { color: 'white'}
     else
         return { color: '#acd523'}
@@ -137,6 +156,17 @@ const isPartActive = (history, path) => {
   else
         return { color: '#acd523'}
      
+=======
+    return {color: '#DAFF31'}
+  else
+    return {color: '#ffffff'}
+}
+const isPartActive = (history, path) => {
+  if (history.location.pathname.includes(path))
+    return {color: '#DAFF31'}
+  else
+    return {color: '#ffffff'}
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
 }
 const Header = withRouter(({history}) =>{
   
@@ -236,11 +266,19 @@ const Header = withRouter(({history}) =>{
 
         {
             !auth.isAuthenticated() && (<span>
+<<<<<<< HEAD
               <Link to="/user/signup" >
                 <Button style={isActive(history, "/user/signup")}>Sign up
                 </Button>
               </Link>
               <Link to="/auth/signin" >
+=======
+              <Link to="/user/signup">
+                <Button style={isActive(history, "/user/signup")}>Sign up
+                </Button>
+              </Link>
+              <Link to="/auth/signin">
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
                 <Button style={isActive(history, "/auth/signin")}>Sign In
                 </Button>
               </Link>
@@ -256,10 +294,16 @@ const Header = withRouter(({history}) =>{
     );
   
     return (
+<<<<<<< HEAD
       
       <div className={classes.grow}  >
         <AppBar className={classes.toolbr} position="static"  >
           <Toolbar >
+=======
+      <div className={classes.grow}>
+        <AppBar position="static">
+          <Toolbar>
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
             <IconButton
               edge="start"
               className={classes.menuButton}
@@ -269,6 +313,7 @@ const Header = withRouter(({history}) =>{
               {/* <MenuIcon /> */}
             </IconButton>
             <div style={{'display':'flex'}}>
+<<<<<<< HEAD
             <Typography className={classes.title} variant="h6" noWrap >
               <img src={logo} alt='Logo' height='45'  />
               <Link to='/' className={classes.textColor}>
@@ -292,6 +337,26 @@ const Header = withRouter(({history}) =>{
               </Link>
               <Link to="/auth/signin" className={classes.logincolor}>
                 <Button className={classes.signcolor} style={isActive(history, "/auth/signin")}>Sign In
+=======
+            <Typography className={classes.title} variant="h6" noWrap>
+              <img src={logo} alt='Logo' height='50'  />
+              <Link to='/' className={classes.textColor}>
+              Kiriikou
+              </Link>
+            </Typography>
+            </div>
+            
+            <div className={classes.grow} />
+            <div className={classes.sectionDesktop}>
+            {
+            !auth.isAuthenticated() && (<span>
+              <Link to="/user/signup">
+                <Button style={isActive(history, "/user/signup")}>Sign up
+                </Button>
+              </Link>
+              <Link to="/auth/signin">
+                <Button style={isActive(history, "/auth/signin")}>Sign In
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
                 </Button>
               </Link>
               
@@ -325,7 +390,10 @@ const Header = withRouter(({history}) =>{
          
              
             </div>
+<<<<<<< HEAD
           
+=======
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
             <div className={classes.sectionMobile}>
               <IconButton
                 aria-label="show more"
@@ -342,7 +410,10 @@ const Header = withRouter(({history}) =>{
         {renderMobileMenu}
         {renderMenu}
       </div>
+<<<<<<< HEAD
    
+=======
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
     );
 
 })

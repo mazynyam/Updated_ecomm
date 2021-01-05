@@ -1,5 +1,6 @@
 .sitewrapper {
   position: absolute;
+<<<<<<< HEAD
  width: 100%;
 }
 
@@ -111,6 +112,20 @@ color:#fff;
   color:#ACD523;
   margin-top: 20px;
 }
+=======
+  /* bottom: 8px; */
+  /* right: 0px; */
+  width: 100%;
+}
+
+.footer {
+  background-color:#213A57;
+  margin: 0px auto;
+  color:#fff;
+  /* padding: 20px 0px 20px 0px; */
+}
+
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
 .butt {
   color: #ACD523;
 }
@@ -153,6 +168,7 @@ a{
 .card-center .img-center{
   align-self: center;
   margin-right: 90px;
+<<<<<<< HEAD
 }
 
 @media only screen and (min-width: 200px) and (max-width: 1089px)  {
@@ -271,4 +287,6 @@ width:320px;
     padding: 0px;
     overflow-x: hidden; 
 }
+=======
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
 }

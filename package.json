@@ -52,6 +52,10 @@
     "webpack-hot-middleware": "^2.25.0",
     "webpack-node-externals": "^1.7.2"
   },
+<<<<<<< HEAD
+=======
+  
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
   "scripts": {
     "development": "nodemon",
     "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",

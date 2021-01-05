@@ -10,6 +10,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import {list} from './api-product.js'
 import Products from './Products'
 
+<<<<<<< HEAD
 import { fade} from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
 
@@ -54,6 +55,36 @@ const useStyles = makeStyles(theme => ({
    
     // marginLeft:'250px',
     // verticalAlign: 'center',
+=======
+const useStyles = makeStyles(theme => ({
+  card: {
+    margin: 'auto',
+    textAlign: 'center',
+    paddingTop: 10,
+    backgroundColor: '#80808024'
+  },
+  menu: {
+    width: 200,
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 130,
+    verticalAlign: 'bottom',
+    marginBottom: '20px'
+  },
+  searchField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 300,
+    marginBottom: '20px'
+  },
+  searchButton: {
+    minWidth: '20px',
+    height: '30px',
+    padding: '0 8px',
+    marginBottom: '20px'
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
   }
 }))
 
@@ -91,6 +122,7 @@ export default function Search(props) {
   }
     return (
       <div>
+<<<<<<< HEAD
         <Card id="srcCard">
           {/* <span className={classes.browse}><h6>Browse categories:</h6></span> */}
           <TextField
@@ -99,6 +131,14 @@ export default function Search(props) {
             label="Shop by category"
             className="textField"
             id="textField"
+=======
+        <Card className={classes.card}>
+          <TextField
+            id="select-category"
+            select
+            label="Select category"
+            className={classes.textField}
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
             value={values.category}
             onChange={handleChange('category')}
             SelectProps={{
@@ -122,11 +162,18 @@ export default function Search(props) {
             type="search"
             onKeyDown={enterKey}
             onChange={handleChange('search')}
+<<<<<<< HEAD
             className="searchField"
           
             margin="normal"
           />
           <Button  className={classes.searchButton} onClick={search}>
+=======
+            className={classes.searchField}
+            margin="normal"
+          />
+          <Button variant="contained" color={'primary'} className={classes.searchButton} onClick={search}>
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
             <SearchIcon/>
           </Button>
           <Divider/>

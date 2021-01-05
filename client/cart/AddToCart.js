@@ -10,8 +10,12 @@ import { Redirect } from 'react-router-dom'
 const useStyles = makeStyles(theme => ({
   iconButton: {
     width: '28px',
+<<<<<<< HEAD
     height: '28px',
     color:'#ACD523'
+=======
+    height: '28px'
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
   },
   disabledIconButton: {
     color: '#7f7563',

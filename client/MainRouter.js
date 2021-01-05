@@ -22,7 +22,11 @@ import StripeConnect from './user/StripeConnect'
 import ShopOrders from './order/ShopOrders'
 import Order from './order/Order'
 import AdminHome from './admin/AdminHome'
+<<<<<<< HEAD
 // import Footer from './core/Footer'
+=======
+import Footer from './core/Footer'
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
 
 const MainRouter = (props) => {
   
@@ -54,7 +58,13 @@ const MainRouter = (props) => {
 
         <Route path="/seller/stripe/connect" component={StripeConnect}/>
       </Switch>
+<<<<<<< HEAD
       
+=======
+      <div id="sitewrapper" >
+          <Footer/>
+      </div>
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
     </div>)
 }
 

@@ -10,7 +10,10 @@ import { makeStyles } from '@material-ui/core/styles'
 import auth from './../auth/auth-helper'
 import {Redirect} from 'react-router-dom'
 import {signin} from './api-auth.js'
+<<<<<<< HEAD
 import { fade} from '@material-ui/core/styles';
+=======
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -25,9 +28,13 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     marginTop: theme.spacing(2),
+<<<<<<< HEAD
     // color: theme.palette.openTitle
     color:"#ACD523",
     fontFamily:"Arial Black"
+=======
+    color: theme.palette.openTitle
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -36,12 +43,16 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: 'auto',
+<<<<<<< HEAD
     marginBottom: theme.spacing(2),
     backgroundColor:"#ACD523",
     '&:hover': {
       color: fade('#fff', 0.8),
       backgroundColor: fade('#acd523', 0.6),
      },
+=======
+    marginBottom: theme.spacing(2)
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
   }
 }))
 

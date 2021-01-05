@@ -7,11 +7,16 @@ import Search from './../product/Search'
 import Categories from './../product/Categories'
 import  {SLIDE_INFO} from '../components/SlideConstant'
 import { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption } from 'reactstrap'
+<<<<<<< HEAD
 import Footer from './Footer'
+=======
+
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     margin: 30,
+<<<<<<< HEAD
 //     position:"fixed",
 //     // width: '160px', /* Set the width of the sidebar */
  
@@ -26,6 +31,10 @@ const useStyles = makeStyles(theme => ({
   
  
 }));
+=======
+  }
+}))
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
 
 
 export default function Home(){
@@ -97,6 +106,7 @@ export default function Home(){
   })
 
     return (
+<<<<<<< HEAD
       <>
 
       <div className={classes.root}>
@@ -127,6 +137,10 @@ export default function Home(){
       
           
           </Grid>
+=======
+      <div className={classes.root}>
+        <Grid container spacing={2}>
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
         <Grid item xs={8}>
           <Carousel 
               activeIndex={activeIndex}
@@ -139,6 +153,7 @@ export default function Home(){
               <CarouselControl direction='next' directionText='Next' onClickHandler={next} />
             </Carousel>
           </Grid>
+<<<<<<< HEAD
           <Grid  item xs={4} sm={4}>
             <Suggestions  products={suggestions} title={suggestionTitle}/>
           </Grid>
@@ -154,6 +169,19 @@ export default function Home(){
       <Footer/>
   </div>
   </>
+=======
+          <Grid item xs={4} sm={4}>
+            <Suggestions products={suggestions} title={suggestionTitle}/>
+          </Grid>
+          <Grid item xs={8} sm={8}>
+            <Search categories={categories}/>
+            <Categories categories={categories}/>
+          </Grid>
+          
+        </Grid>
+   
+      </div>
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
     )
 }
 
