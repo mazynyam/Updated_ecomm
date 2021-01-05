@@ -1,0 +1,274 @@
+.sitewrapper {
+  position: absolute;
+ width: 100%;
+}
+
+#srcCard {
+margin-top: 0px;
+text-align: center;
+height: 60px;
+ border-radius: 40px;
+width:423px;
+
+}
+
+.footer {
+  background-color:#17293d;
+  margin: 0px auto;
+  color:rgb(193, 199, 204); 
+  height:30;
+  width: 100%;
+font-size:11;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+#copybar{
+  background-color:#17293d;
+  color:#ACD523;
+  height:25px;
+  font-style: normal;
+  margin-left: 150px;
+  
+
+}
+
+#shp{
+color:#fff; 
+  margin-bottom: 10px;
+  margin-left: 650px;
+}
+#ord{
+  margin:auto;
+  border-style:none none none none;
+  color:#fff;
+  margin-top: 0px; 
+  margin-bottom: 10px;
+  margin-left: 30px;
+}
+
+.textField {
+  
+  width: 150px;
+ 
+  text-align: center;
+  margin-bottom: 80px;
+  margin-top:0px;
+  /* margin-left:30px; */
+}
+.searchField {
+  margin-bottom: px;
+  margin-top:0px;
+  width: 150px;
+  text-align: center;
+  
+  /* margin-top:0px; */
+ 
+
+}
+
+
+#colorcart{
+  color:#ACD523;
+}
+#sellcolour{
+  color:#ACD523;
+  margin-top: 20px;
+  
+}
+#moneycolour{
+  color:#333;
+  margin-top:5px;
+  font-size:13px;
+  margin-left:0px;
+}
+#trt{
+  color:#ACD523;
+  margin-top: 20px;
+}
+#trust{
+  color:#333;
+  margin-top:5px;
+  font-size:13px;
+  margin-left:0px;
+}
+#support{
+  
+  color:#333;
+  margin-top:5px;
+  font-size:13px;
+  margin-left:0px;
+}
+#supp{
+  color:#ACD523;
+  margin-top: 20px;}
+#payment{
+  
+  color:#333;
+  margin-top:5px;
+  font-size:13px;
+  margin-left:0px;
+}
+#paynt{
+  color:#ACD523;
+  margin-top: 20px;
+}
+.butt {
+  color: #ACD523;
+}
+svg{
+  height:30px;
+  cursor:pointer;
+}
+Link{
+  text-decoration: none;
+}
+a{
+  text-decoration: none;
+}
+.btngroup{
+  display: flex;
+  justify-content: space-between;
+}
+.root{
+  flex-grow: 1;
+}
+.card-center{
+  align-self: center;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0, 0.2);
+  padding: 20px;
+  /* margin: 10px; */
+  color:#333;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin:auto;
+  max-width:600px;
+}
+.card-center h2{
+  text-align: center;
+  font-size: 2rem;
+}
+.card-center .img-center{
+  align-self: center;
+  margin-right: 90px;
+}
+
+@media only screen and (min-width: 200px) and (max-width: 1089px)  {
+  .footer {
+    background-color:#17293d;
+    margin: 0px auto;
+    color:rgb(193, 199, 204);
+     height:30;
+   position: fixed;  
+     bottom: 0; 
+    width: 100%;
+font-size:11;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  html,body
+{
+    width: auto;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+}
+.toolbr {
+    
+  height:'33px';
+  
+  
+}
+.title {
+  display: 'block';
+  
+  
+}
+#shp{
+  
+  
+  color:#fff; 
+  margin-bottom: 10px;
+  
+  margin-left: 10px;
+}
+#ord{
+  
+  margin:auto;
+  /* background-color: #17293d; */
+  border-style:none none none none;
+  color:#fff;
+  margin-top: 0px; 
+  margin-bottom: 10px;
+  margin-left: 30px;
+}
+
+
+
+#srcCard {
+margin-top: 0px;
+text-align: center;
+height: 62px;
+ border-radius: 60px;
+width:320px;
+}
+
+
+#moneycolour{
+  color:#333;
+  margin-top:12px;
+  font-size:7px;
+  margin-left:0px;
+  width:100%;
+}
+
+#trust{
+  color:#333;
+  margin-top:12px;
+  font-size:7px;
+  margin-left:0px;
+}
+#support{
+  
+  color:#333;
+  margin-top:12px;
+  font-size:7px;
+  margin-left:0px;
+}
+
+#payment{
+  
+  color:#333;
+  margin-top:12px;
+  font-size:7px;
+  margin-left:0px;
+  text-align: center;
+}
+
+.textField {
+ width: 150px;
+   margin-bottom: 80px; 
+   
+}
+.searchField {
+  width: 120px;
+   margin-bottom: 80px;
+  }
+  #tilett{
+    width:200px;
+  }
+}
+
+
+
+@media only screen and (max-width: 16000px)  {
+ 
+  html,body
+{
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+}
+}
