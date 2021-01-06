@@ -11,11 +11,7 @@ import PropTypes from 'prop-types'
 import {makeStyles} from '@material-ui/core/styles'
 import cart from './cart-helper.js'
 import {Link} from 'react-router-dom'
-<<<<<<< HEAD
 import { fade} from '@material-ui/core/styles';
-=======
-
->>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
 const useStyles = makeStyles(theme => ({
   card: {
     margin: '24px 0px',
@@ -24,7 +20,6 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     margin: theme.spacing(2),
-<<<<<<< HEAD
     // color: theme.palette.openTitle,
     fontSize: '1.2em',
     color: "black",
@@ -34,14 +29,6 @@ const useStyles = makeStyles(theme => ({
     display: 'inline',
 
     
-=======
-    color: theme.palette.openTitle,
-    fontSize: '1.2em'
-  },
-  price: {
-    color: theme.palette.text.secondary,
-    display: 'inline'
->>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -81,7 +68,6 @@ const useStyles = makeStyles(theme => ({
     float: 'right',
     marginRight: '40px',
     fontSize: '1.5em',
-<<<<<<< HEAD
     // color: 'rgb(72, 175, 148)'
     color:' #17293d',
     
@@ -111,23 +97,6 @@ const useStyles = makeStyles(theme => ({
       color: fade('#acd523', 0.25),
       },
   
-=======
-    color: 'rgb(72, 175, 148)'
-  },
-  checkout: {
-    float: 'right',
-    margin: '24px'
-  },
-  total: {
-    fontSize: '1.2em',
-    color: 'rgb(53, 97, 85)',
-    marginRight: '16px',
-    fontWeight: '600',
-    verticalAlign: 'bottom'
-  },
-  continueBtn: {
-    marginLeft: '10px'
->>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
   },
   itemShop: {
     display: 'block',
@@ -135,7 +104,6 @@ const useStyles = makeStyles(theme => ({
     color: '#78948f'
   },
   removeButton: {
-<<<<<<< HEAD
     fontSize: '0.8em',
     color:'#ACD523'
   },
@@ -164,10 +132,6 @@ fontSize:"12px"
   },
   
     
-=======
-    fontSize: '0.8em'
-  }
->>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
 }))
 
 export default function CartItems (props) {
@@ -245,7 +209,6 @@ export default function CartItems (props) {
           </span>})
         }
         <div className={classes.checkout}>
-<<<<<<< HEAD
           <span className={classes.total}>Total: <span className={classes.gtotal}>${getTotal()}</span></span>
           {!props.checkout && (auth.isAuthenticated()?
             <Button color="secondary" variant="contained" onClick={openCheckout}>Checkout</Button>
@@ -255,17 +218,6 @@ export default function CartItems (props) {
             </Link>)}
           <Link to='/' className={classes.continueBtn}>
             <Button className={classes.continueShp} variant="contained">Continue Shopping</Button>
-=======
-          <span className={classes.total}>Total: ${getTotal()}</span>
-          {!props.checkout && (auth.isAuthenticated()?
-            <Button color="secondary" variant="contained" onClick={openCheckout}>Checkout</Button>
-            :
-            <Link to="/auth/signin">
-              <Button color="primary" variant="contained">Sign in to checkout</Button>
-            </Link>)}
-          <Link to='/' className={classes.continueBtn}>
-            <Button variant="contained">Continue Shopping</Button>
->>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
           </Link>
         </div>
       </span>) :

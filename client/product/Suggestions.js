@@ -21,8 +21,7 @@ const useStyles = makeStyles(theme => ({
   }),
   title: {
     margin: `${theme.spacing(4)}px 0 ${theme.spacing(2)}px`,
-<<<<<<< HEAD
-    // color: theme.palette.openTitle,
+    color: theme.palette.openTitle,
     color:'#ACD523',
     fontSize: '2.0em',
 
@@ -30,19 +29,15 @@ const useStyles = makeStyles(theme => ({
     fontWeight:"bolder",
   },
   nowsh: {
-    // padding:`${theme.spacing(1)}px ${theme.spacing(1)}px ${theme.spacing(1)}px`,
-    // // color: theme.palette.openTitle,
+    padding:`${theme.spacing(1)}px ${theme.spacing(1)}px ${theme.spacing(1)}px`,
+    // color: theme.palette.openTitle,
     color:'#17293d',
-    // backgroundColor: '#80808024',
+    backgroundColor: '#808024',
     fontSize: '12px',
     fontFamily:"Arial",
     
-    // marginTop: -19,
-    // fontSize: 11,
-=======
-    color: theme.palette.openTitle,
-    fontSize: '1.1em'
->>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
+    marginTop: -19,
+    fontSize: 11,
   },
   viewButton: {
     verticalAlign: 'middle'
@@ -71,7 +66,6 @@ const useStyles = makeStyles(theme => ({
     color: 'rgba(0, 0, 0, 0.4)'
   },
   icon: {
-<<<<<<< HEAD
     verticalAlign: 'sub',
     color:'#ACD523'
   },
@@ -89,17 +83,6 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '5px',
     color:"#17293d",
     fontWeight:"40px"
-=======
-    verticalAlign: 'sub'
-  },
-  iconButton: {
-    width: '28px',
-    height: '28px'
-  },
-  productTitle: {
-    fontSize: '1.15em',
-    marginBottom: '5px'
->>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
   },
   subheading: {
     color: 'rgba(88, 114, 128, 0.67)'
@@ -121,11 +104,7 @@ export default function Suggestions (props) {
     return (<div>
       <Paper className={classes.root} elevation={4}>
         <Typography type="title" className={classes.title}>
-<<<<<<< HEAD
-          {props.title} <span className={classes.nowsh}>Shop now</span>
-=======
-          {props.title}
->>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
+          {props.title} 
         </Typography>
         {props.products.map((item, i) => {
             return <span key={i}>
@@ -155,11 +134,7 @@ export default function Suggestions (props) {
                             <ViewIcon className={classes.iconButton}/>
                           </IconButton>
                         </Link>
-<<<<<<< HEAD
                         <AddToCart className={classes.cartButton} item={item}/>
-=======
-                        <AddToCart item={item}/>
->>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
                       </span>
                     </div>
                   </div>

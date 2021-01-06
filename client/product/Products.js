@@ -30,18 +30,13 @@ const useStyles = makeStyles(theme => ({
   title: {
     padding:`${theme.spacing(3)}px ${theme.spacing(2.5)}px ${theme.spacing(2)}px`,
     color: theme.palette.openTitle,
-<<<<<<< HEAD
     width: '100%',
   
-=======
-    width: '100%'
->>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
   },
   tile: {
     textAlign: 'center'
   },
   image: {
-<<<<<<< HEAD
     height: '80%',
     
   },
@@ -72,20 +67,6 @@ const useStyles = makeStyles(theme => ({
     
   },
   
-=======
-    height: '100%'
-  },
-  tileBar: {
-    backgroundColor: 'rgba(0, 0, 0, 0.72)',
-    textAlign: 'left'
-  },
-  tileTitle: {
-    fontSize:'1.1em',
-    marginBottom:'5px',
-    color:'rgb(189, 222, 219)',
-    display:'block'
-  }
->>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
 }))
 
 export default function Products(props){
@@ -100,11 +81,7 @@ export default function Products(props){
               <Link to={"/product/"+product._id}><img className={classes.image} src={'/api/product/image/'+product._id} alt={product.name} /></Link>
               <GridListTileBar className={classes.tileBar}
                 title={<Link to={"/product/"+product._id} className={classes.tileTitle}>{product.name}</Link>}
-<<<<<<< HEAD
                 subtitle={<span className={classes.priceTitle}>$ {product.price}</span>}
-=======
-                subtitle={<span>$ {product.price}</span>}
->>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
                 actionIcon={
                   <AddToCart item={product}/>
                 }

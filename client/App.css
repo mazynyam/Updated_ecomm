@@ -1,44 +1,7 @@
-<<<<<<< HEAD
-#srcCard {
-  margin-top: 0px;
-  text-align: center;
-  height: 60px;
-   border-radius: 40px;
-  width:423px;
-  
-  }
-  
-  .footer {
-    background-color:#17293d;
-    margin: 0px auto;
-    color:rgb(193, 199, 204); 
-    height:30;
-    width: 100%;
-  font-size:11;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  }
-  #copybar{
-    background-color:#17293d;
-    color:#ACD523;
-    height:25px;
-    font-style: normal;
-    margin-left: 150px;
-    
-  
-  }
-  
-  #shp{
-  color:#fff; 
-    margin-bottom: 10px;
-    margin-left: 650px;
-  }
-=======
 .sitewrapper {
   position: absolute;
-<<<<<<< HEAD
  width: 100%;
 }
-
 #srcCard {
 margin-top: 0px;
 text-align: center;
@@ -47,7 +10,6 @@ height: 60px;
 width:423px;
 
 }
-
 .footer {
   background-color:#17293d;
   margin: 0px auto;
@@ -66,7 +28,6 @@ font-size:11;
   
 
 }
-
 #shp{
 color:#fff; 
   margin-bottom: 10px;
@@ -80,7 +41,6 @@ color:#fff;
   margin-bottom: 10px;
   margin-left: 30px;
 }
-
 .textField {
   
   width: 150px;
@@ -100,7 +60,6 @@ color:#fff;
  
 
 }
-
 
 #colorcart{
   color:#ACD523;
@@ -147,90 +106,6 @@ color:#fff;
   color:#ACD523;
   margin-top: 20px;
 }
-=======
-  /* bottom: 8px; */
-  /* right: 0px; */
-  width: 100%;
-}
->>>>>>> 041df96c85e649777993eda9178b080b44ad6fdd
-
-  #ord{
-    margin:auto;
-    border-style:none none none none;
-    color:#fff;
-    margin-top: 0px; 
-    margin-bottom: 10px;
-    margin-left: 30px;
-  }
-  
-  .textField {
-    
-    width: 150px;
-   
-    text-align: center;
-    margin-bottom: 80px;
-    margin-top:0px;
-    /* margin-left:30px; */
-  }
-  .searchField {
-    margin-bottom: px;
-    margin-top:0px;
-    width: 150px;
-    text-align: center;
-    
-    /* margin-top:0px; */
-   
-  
-  }
-  
-  
-  #colorcart{
-    color:#ACD523;
-  }
-  #sellcolour{
-    color:#ACD523;
-    margin-top: 20px;
-    
-  }
-  #moneycolour{
-    color:#333;
-    margin-top:5px;
-    font-size:13px;
-    margin-left:0px;
-  }
-  #trt{
-    color:#ACD523;
-    margin-top: 20px;
-  }
-  #trust{
-    color:#333;
-    margin-top:5px;
-    font-size:13px;
-    margin-left:0px;
-  }
-  #support{
-    
-    color:#333;
-    margin-top:5px;
-    font-size:13px;
-    margin-left:0px;
-  }
-  #supp{
-    color:#ACD523;
-    margin-top: 20px;}
-  #payment{
-    
-    color:#333;
-    margin-top:5px;
-    font-size:13px;
-    margin-left:0px;
-  }
-  #paynt{
-    color:#ACD523;
-    margin-top: 20px;
-  }
-
->>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
 .butt {
   color: #ACD523;
 }
@@ -273,7 +148,7 @@ a:hover{
 .card-center .img-center{
   align-self: center;
   margin-right: 90px;
-<<<<<<< HEAD
+
 }
 
 .navbar{
@@ -591,9 +466,6 @@ body{
 .form-box input:valid{
   width: 100%;
   border-bottom: 2px solid rgb(76, 118, 224);
-=======
-<<<<<<< HEAD
->>>>>>> 041df96c85e649777993eda9178b080b44ad6fdd
 }
 
 @media only screen and (min-width: 200px) and (max-width: 1089px)  {
@@ -601,19 +473,11 @@ body{
     background-color:#17293d;
     margin: 0px auto;
     color:rgb(193, 199, 204);
-<<<<<<< HEAD
     height:30;
     position: fixed;  
     bottom: 0; 
     width: 100%;
     font-size:11;
-=======
-     height:30;
-   position: fixed;  
-     bottom: 0; 
-    width: 100%;
-font-size:11;
->>>>>>> 041df96c85e649777993eda9178b080b44ad6fdd
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
   html,body
@@ -634,92 +498,9 @@ font-size:11;
   
   
 }
-#shp{
-  
-  
-<<<<<<< HEAD
-  /* color:#fff;  */
-=======
-  color:#fff; 
->>>>>>> 041df96c85e649777993eda9178b080b44ad6fdd
-  margin-bottom: 10px;
-  
-  margin-left: 10px;
-}
-#ord{
-  
-  margin:auto;
-  /* background-color: #17293d; */
-  border-style:none none none none;
-  color:#fff;
-  margin-top: 0px; 
-  margin-bottom: 10px;
-  margin-left: 30px;
-}
 
 
-
-#srcCard {
-margin-top: 0px;
-text-align: center;
-height: 62px;
- border-radius: 60px;
-width:320px;
-}
-
-
-#moneycolour{
-  color:#333;
-  margin-top:12px;
-  font-size:7px;
-  margin-left:0px;
-  width:100%;
-}
-
-#trust{
-  color:#333;
-  margin-top:12px;
-  font-size:7px;
-  margin-left:0px;
-}
-#support{
-  
-  color:#333;
-  margin-top:12px;
-  font-size:7px;
-  margin-left:0px;
-}
-
-#payment{
-  
-  color:#333;
-  margin-top:12px;
-  font-size:7px;
-  margin-left:0px;
-  text-align: center;
-}
-
-.textField {
- width: 150px;
-   margin-bottom: 80px; 
-   
-}
-.searchField {
-  width: 120px;
-   margin-bottom: 80px;
-  }
-  #tilett{
-    width:200px;
-  }
-}
-
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 041df96c85e649777993eda9178b080b44ad6fdd
 @media only screen and (max-width: 16000px)  {
- 
   html,body
 {
     width: 100%;
@@ -727,15 +508,4 @@ width:320px;
     padding: 0px;
     overflow-x: hidden; 
 }
-<<<<<<< HEAD
-
-}
-
-
-
-
-=======
-=======
->>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
-}
->>>>>>> 041df96c85e649777993eda9178b080b44ad6fdd
+}}
