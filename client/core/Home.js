@@ -7,6 +7,7 @@ import Search from './../product/Search'
 import Categories from './../product/Categories'
 import  {SLIDE_INFO} from '../components/SlideConstant'
 import { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption } from 'reactstrap'
+import RequestForQuotation from './../components/RequestForQuotation'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -149,7 +150,7 @@ export default function Home(){
           </Grid> 
   
         </Grid>
-         
+         <RequestForQuotation />
       </Grid>
       </div>
       
