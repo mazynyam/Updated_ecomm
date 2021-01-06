@@ -1,5 +1,6 @@
 import express from 'express'
 import path from 'path'
+import auth from './../client/auth/auth-helper'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import compress from 'compression'
@@ -11,6 +12,9 @@ import authRoutes from './routes/auth.routes'
 import shopRoutes from './routes/shop.routes'
 import productRoutes from './routes/product.routes'
 import orderRoutes from './routes/order.routes'
+import Chat from './models/chatModel'
+import queryString from 'querystring'
+
 
 // modules for server side rendering
 import React from 'react'
@@ -25,9 +29,13 @@ import theme from './../client/theme'
 //comment out before building for production
 import devBundle from './devBundle'
 
+const { addUser, removeUser, getUser, getUsersInRoom } = require('./../client/chat/users')
+
 const CURRENT_WORKING_DIR = process.cwd()
 const app = express()
 
+const server = require('http').createServer(app)
+const io = require('socket.io')(server)
 //comment out before building for production
 devBundle.compile(app)
 
@@ -43,6 +51,57 @@ app.use(cors())
 
 app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 
+io.on('connection', socket => {
+  console.log('New connection!!!');
+
+  socket.on('join',({name, room}, callback) =>{
+    // try{
+    //   let chat = new Chat({message: msg.chatMessage, sender:msg.userId, type:msg.type})
+    //   chat.save((err,doc)=>{
+    //     if(err)return res.json({ success:false, err})
+    //     Chat.find({"_id":doc._id})
+    //     .populate("sender")
+    //     .exec((err, doc)=>{
+    //       return io.emit("Output Chat Message", doc)
+    //     })
+    //   })
+    // }
+    // catch(error){
+    //   console.error(error)
+    // }
+
+    const {error, user} = addUser({id: auth.authenticated().user._id, name:auth.authenticated().user.name, room})
+    if(error) return callback(error)
+
+    socket.emit('message', { user: 'admin', text:`${auth.isAuthenticated().user.name}, Welcome to Kiriikou Customer Support Center`});
+    socket.broadcast.to(user.room).emit('message', {user:'admin', text:`${auth.isAuthenticated().user.name}  joined`});
+
+    socket.join(user.room)
+    callback()
+    
+  })
+  socket.on('sendMessage', (message, callback)=>{
+    const chat = new Chat()
+    io.to(chat.room).emit('message', { chat:chat.sender, text: message })
+    try {
+      chat.save((err, doc)=>{
+        if(err)return res.json({ success: false, err})
+        Chat.find({"_id": doc._id})
+        .populate(sender)
+        .exec((err, doc)=>{
+          return io.emit('chat message', doc);
+        })
+      })
+    } catch (error) {
+      console.error(error)
+    }
+    callback()
+  })
+  socket.on('disconnect', ()=>{
+    console.log('User has left')
+  })
+})
+
 // mount routes
 app.use('/', userRoutes)
 app.use('/', authRoutes)
@@ -53,6 +112,16 @@ app.use('/', orderRoutes)
 app.get('*', (req, res) => {
   const sheets = new ServerStyleSheets()
   const context = {}
+  let name;
+  switch (name) {
+    case queryString.location === '/auth/signin':
+      name = 'Login'
+      case queryString.location === '/user/signup':
+      name = 'Register'
+    default:
+      name = 'Home'
+      break;
+  }
   const markup = ReactDOMServer.renderToString(
     sheets.collect(
       <StaticRouter location={req.url} context={context}>
@@ -65,10 +134,12 @@ app.get('*', (req, res) => {
     if (context.url) {
       return res.redirect(303, context.url)
     }
+    
     const css = sheets.toString()
     res.status(200).send(Template({
       markup: markup,
-      css: css
+      css: css,
+      name: name
     }))
 })
 

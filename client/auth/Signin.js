@@ -70,13 +70,15 @@ export default function Signin(props) {
 
   const {from} = props.location.state || {
     from: {
-      pathname: '/'
-    }
+      pathname: '/' 
+    } 
+    
   }
   const {redirectToReferrer} = values
   if (redirectToReferrer) {
       return (<Redirect to={from}/>)
   }
+  
 
   return (
       <Card className={classes.card}>

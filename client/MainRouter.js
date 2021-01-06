@@ -21,27 +21,37 @@ import Cart from './cart/Cart'
 import StripeConnect from './user/StripeConnect'
 import ShopOrders from './order/ShopOrders'
 import Order from './order/Order'
-import AdminHome from './admin/AdminHome'
+import CustomerInfo from './admin/pages/CustomerInfo'
 import Footer from './core/Footer'
+import MyProducts from './product/MyProducts'
+import Chat from './chat/Chat'
+
 
 const MainRouter = (props) => {
   
-  return (<div>
+  return (
+      <>
+      <div>
+
       <Header/>
+      {/* <Navbar /> */}
+      
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route path="/users" component={Users}/>
         <Route path="/user/signup" component={Signup}/>
         <Route path="/auth/signin" component={Signin}/>
-        <Route path="/admin-signin" component={AdminSignin}/>
+        <Route path="/auth/admin/signin" component={AdminSignin}/>
         <PrivateRoute path="/user/edit/:userId" component={EditProfile}/>
         <Route path="/user/:userId" component={Profile}/>
-        <Route path='/admin-home' component={AdminHome} />
+        {/* <Route path='/admin-home' component={AdminHome} /> */}
 
         <Route path="/cart" component={Cart}/>
         <Route path="/product/:productId" component={Product}/>
         <Route path="/shops/all" component={Shops}/>
         <Route path="/shops/:shopId" component={Shop}/>
+
+        <Route path="/chat" component={Chat} />
 
         <Route path="/order/:orderId" component={Order}/>
         <PrivateRoute path="/seller/orders/:shop/:shopId" component={ShopOrders}/>
@@ -53,11 +63,17 @@ const MainRouter = (props) => {
         <PrivateRoute path="/seller/:shopId/:productId/edit" component={EditProduct}/>
 
         <Route path="/seller/stripe/connect" component={StripeConnect}/>
+
+        <PrivateRoute path="/admin/users" component={Users} />
+        <PrivateRoute path='/admin/products/all' component={MyProducts} />
       </Switch>
+    </div>
       <div id="sitewrapper" >
           <Footer/>
       </div>
-    </div>)
+    </>
+    )
+
 }
 
 export default MainRouter

@@ -89,15 +89,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 const isActive = (history, path) => {
   if (history.location.pathname == path)
-    return {color: '#DAFF31'}
-  else
-    return {color: '#ffffff'}
+
+  return { color: 'white'}
+    else
+        return { color: '#acd523'}
+   
 }
+
 const isPartActive = (history, path) => {
   if (history.location.pathname.includes(path))
     return {color: '#DAFF31'}
   else
     return {color: '#ffffff'}
+
 }
 const Header = withRouter(({history}) =>{
   
@@ -217,8 +221,9 @@ const Header = withRouter(({history}) =>{
     );
   
     return (
+
       <div className={classes.grow}>
-        <AppBar position="static">
+       <AppBar position="static">
           <Toolbar>
             <IconButton
               edge="start"
@@ -232,7 +237,7 @@ const Header = withRouter(({history}) =>{
             <Typography className={classes.title} variant="h6" noWrap>
               <img src={logo} alt='Logo' height='50'  />
               <Link to='/' className={classes.textColor}>
-              Kiriikou
+              Kiriikou.com
               </Link>
             </Typography>
             </div>
@@ -249,7 +254,6 @@ const Header = withRouter(({history}) =>{
                 <Button style={isActive(history, "/auth/signin")}>Sign In
                 </Button>
               </Link>
-              
             </span>)
           }
           {
@@ -259,15 +263,12 @@ const Header = withRouter(({history}) =>{
                   <Link to={"/user/" + auth.isAuthenticated().user._id}>
                     <Button style={isActive(history, "/user/" + auth.isAuthenticated().user._id)}>{auth.isAuthenticated().user.name}</Button>
                   </Link>
-                  
-                     
-                    
                     <Button color="inherit" onClick={() => {
                       auth.clearJWT(() => history.push('/'))
                     }}>Sign out</Button>
                 </span>)
               }
-          {
+            {
                 auth.isAuthenticated() &&  !auth.isAuthenticated().user.seller && (<span>
 
                     <Link to="/business/register/new">
@@ -276,9 +277,7 @@ const Header = withRouter(({history}) =>{
                     </Link>
                    
                 </span>)
-              }
-         
-             
+              } 
             </div>
             <div className={classes.sectionMobile}>
               <IconButton
@@ -295,11 +294,10 @@ const Header = withRouter(({history}) =>{
         </AppBar>
         {renderMobileMenu}
         {renderMenu}
-      </div>
-    );
+     
+
+   </div> );
 
 })
 
 export default Header;
-
-

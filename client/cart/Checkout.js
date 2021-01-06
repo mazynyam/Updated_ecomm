@@ -8,7 +8,7 @@ import auth from './../auth/auth-helper'
 import cart from './cart-helper.js'
 import PlaceOrder from './PlaceOrder'
 import {Elements} from 'react-stripe-elements'
-
+import { useFlutterwave, FlutterwaveButton } from 'react-flutterwave'
 const useStyles = makeStyles(theme => ({
   card: {
     margin: '24px 0px',
@@ -54,6 +54,34 @@ export default function Checkout (){
     },
     error: ''
   })
+  const flutterwaveConfig =  {
+    public_key: '',
+    txt_ref: Date.now(),
+    amount: cart.itemTotal,
+    currency: 'USD',
+    payment_options: 'card,mobilemoneyghana',
+    customer: {
+      email: user.email,
+      phonenumber: user.phone,
+      name: user.name
+    },
+    customizations:{
+      title: 'Kiriikou.com',
+      description:'Payment of Services',
+      logo:''
+    }
+  };
+
+  const handleFlutterwavePayment = useFlutterwave(config);
+
+  const fwConfig = {
+    ...config,
+    text:'Pay with Flutterwave',
+    callback: (response)=>{
+      console.log(response);
+    },
+    onClose: () => {}
+  };
 
   const handleCustomerChange = name => event => {
     let checkoutDetails = values.checkoutDetails

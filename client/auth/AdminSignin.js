@@ -69,7 +69,7 @@ export default function AdminSignin(props) {
 
   const {from} = props.location.state || {
     from: {
-      pathname: '/admin-home'
+      pathname: '/admin'
     }
   }
   const {redirectToReferrer} = values

@@ -128,12 +128,16 @@ export default function EditShop ({match}) {
     })
   }
   const handleChange = name => event => {
-    const value = name === 'image' || name === 'business_certificate' || name === 'identity_card_front' || name === 'identity_card_back'
+    const value = name === 'image'
       ? event.target.files[0]
       : event.target.value
     setValues({...values,  [name]: value })
   }
-
+  const handleImage = name => e =>{
+    const pic = name === 'business_certificate' || name === 'identity_card_front' || name==='identity_card_back' ? e.target.files[0] : e.target.pic
+    setValues({...values, [name]: pic})
+  }
+  
     const logoUrl = values.id
           ? `/api/shops/logo/${values.id}?${new Date().getTime()}`
           : '/api/shops/defaultphoto'
@@ -220,7 +224,7 @@ export default function EditShop ({match}) {
                 {
                     !values.is_business_registered && (
                         <div>
-                        <input accept="image/*" onChange={handleChange('identity_card_front')} className={classes.input} id="identity_card_front" type="file" />
+                        <input accept="image/*" onChange={handleImage('identity_card_front')} className={classes.input} id="identity_card_front" type="file" />
                             <label htmlFor="icon-button-file">
                               <Button variant="contained" color="secondary" component="span">
                                 Upload ID Card Front
@@ -228,7 +232,7 @@ export default function EditShop ({match}) {
                               </Button>
                             </label> <span className={classes.filename}>{values.identity_card_front ? values.identity_card_front.name : ''}</span><br/>
                             
-                            <input accept="image/*" onChange={handleChange('identity_card_back')} className={classes.input} id="identity_card_back" type="file" />
+                            <input accept="image/*" onChange={handleImage('identity_card_back')} className={classes.input} id="identity_card_back" type="file" />
                             <label htmlFor="icon-button-file">
                                 <Button variant="contained" color="secondary" component="span">
                                 Upload  ID Card Back

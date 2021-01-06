@@ -6,6 +6,8 @@ import theme from './theme'
 import { hot } from 'react-hot-loader'
 import './App.css'
 
+
+
 const App = () => {
   React.useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side')

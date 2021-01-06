@@ -89,3 +89,33 @@ span{
    
     margin-left:  14rem;
 }
+.isSidebar{
+    background-color: purple;
+    width:14rem;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position:fixed;
+    top:0;
+    transition-duration: 700ms;
+    left:0;
+
+}
+.menu-ul{
+    width:100%;
+}
+.menu-li{
+    height: 5rem;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    justify-items: start;
+}
+
+.menu-link{
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+    font-size: 1.875rem;
+    background: none;
+    display: inline-flex;
+}

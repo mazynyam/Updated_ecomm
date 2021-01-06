@@ -84,9 +84,49 @@ export default function Home(){
     )
   })
 
+  const [showInfo, setShowInfo]= useState(false)
+
+  // const Chat =() =>{
+  //   var x = document.getElementById("myDIV");
+  //   if (x.style.display === "block") {
+  //     x.style.display = "none";
+  //   } else {
+  //     x.style.display = "block";
+  //     document.getElementById("test").focus();
+
+  //   }
+  // }
     return (
-      <div className={classes.root}>
-        <Grid container spacing={2}>
+      <>
+       <div className={classes.root}>
+        <Grid container spacing={1}>
+        <Grid item xs={4} >
+            <Search categories={categories}/>
+           
+          </Grid>
+          <Grid item xs={2} sm={2}>
+            
+          <h6 id="moneycolour"><span className="fa fa-money fa-lg" id="sellcolour"></span> Make money on Kiriikou</h6>
+          
+          </Grid>
+          <Grid item xs={2} sm={2}>
+          <h6 id="trust"><span className="fa fa-shopping-bag fa-lg" id="trt"></span> Shop with trust</h6>
+      
+          
+          </Grid>
+          <Grid item xs={2} sm={2}>
+          <h6 id="support"><span className="fa fa-clock-o fa-lg" id="supp"></span>24/7 Support</h6>
+      
+         
+          </Grid>
+          <Grid item xs={2} sm={2}>
+          <h6 id="payment"><span className="fa fa-credit-card fa-lg" id="paynt"></span>Secure Payment</h6>
+      
+          
+          </Grid>
+          
+          <Grid container spacing={2}>
+
         <Grid item xs={8}>
           <Carousel 
               activeIndex={activeIndex}
@@ -99,18 +139,28 @@ export default function Home(){
               <CarouselControl direction='next' directionText='Next' onClickHandler={next} />
             </Carousel>
           </Grid>
-          <Grid item xs={4} sm={4}>
-            <Suggestions products={suggestions} title={suggestionTitle}/>
+
+          <Grid  item xs={4} sm={4}>
+            <Suggestions  products={suggestions} title={suggestionTitle}/>
           </Grid>
           <Grid item xs={8} sm={8}>
-            <Search categories={categories}/>
-            <Categories categories={categories}/>
-          </Grid>
           
+            <Categories categories={categories}/>
+          </Grid> 
+  
         </Grid>
-   
+         
+      </Grid>
       </div>
+      
+      <div className="button">
+              <div className="icon">
+                  <button className="floating-btn" onClick={() => { setShowInfo(!showInfo)}} >
+                      <i className="fas fa-comments 4x"></i>
+                  </button>
+              </div>
+          </div>
+      </>
+
     )
 }
-
-

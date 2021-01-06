@@ -80,6 +80,11 @@ export default function NewBusiness(){
         setValues({...values, [name]: value })
 
     }
+    const handleImage = name => e =>{
+      const pic =  name === 'identity_card_front' || name==='identity_card_back' ? e.target.files[0] : e.target.pic
+      setValues({...values, [name]: pic})
+    }
+
     const handleCheck = (event, checked) => {
         setValues({...values, 'is_business_registered': checked})
       }
@@ -190,18 +195,19 @@ export default function NewBusiness(){
                                 <FileUpload/>
                                 </Button>
                             </label> <span className={classes.filename}>{values.identity_card_front ? values.identity_card_front.name : ''}</span><br/>
-                            
-                            <input accept="image/*" onChange={handleChange('identity_card_back')} className={classes.input} id="icon-button-file" type="file" />
-                            <label htmlFor="icon-button-file">
-                                <Button variant="contained" color="secondary" component="span">
-                                Upload an ID Card Back
-                                <FileUpload/>
-                                </Button>
-                            </label> <span className={classes.filename}>{values.identity_card_back ? values.identity_card_back.name : ''}</span><br/>
-
-                        </div>
+                         
+                         <input accept="image/*" onChange={handleImage('identity_card_back')} className={classes.input} id="icon-button-file" type="file" />
+                              <label htmlFor="icon-button-file">
+                                  <Button variant="contained" color="secondary" component="span">
+                                  Upload an ID Card Back
+                                  <FileUpload/>
+                                  </Button>
+                              </label> <span className={classes.filename}>{values.identity_card_back ? values.identity_card_back.name : ''}</span><br/>
+  
+                      </div>
                     )
                 }
+                
                  <br/> 
                  {
                     values.error && (<Typography component="p" color="error">

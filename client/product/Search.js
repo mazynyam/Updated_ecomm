@@ -75,10 +75,14 @@ export default function Search(props) {
   }
     return (
       <div>
-        <Card className={classes.card}>
+        <Card id="srcCard">
+          {/* <span className={classes.browse}><h6>Browse categories:</h6></span> */}
           <TextField
             id="select-category"
             select
+            label="Shop by category"
+            className="textField"
+            id="textField"
             label="Select category"
             className={classes.textField}
             value={values.category}
@@ -104,7 +108,9 @@ export default function Search(props) {
             type="search"
             onKeyDown={enterKey}
             onChange={handleChange('search')}
-            className={classes.searchField}
+
+            className="searchField"
+          
             margin="normal"
           />
           <Button variant="contained" color={'primary'} className={classes.searchButton} onClick={search}>

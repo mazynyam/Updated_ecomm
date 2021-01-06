@@ -1,20 +1,21 @@
 import React from 'react';
-import SellerInfoCard from './../components/SellerInfoCard'
-import CustomerData from './../pages/CustomerData'
+
+import {CustomerData} from './CustomerData'
 function CustomerInfo() {
     
     return (
         <div>
             {CustomerData.map((item, index)=>{
                 return(
-                    <SellerInfoCard 
-                        key={index}
-                        title='Customer Details' 
-                        name={item.name} location={item.location}
-                        email='lampteyphinehas70@gmail.com'
-                        status='Active' phone={item.contact}
-                        joined='10-10-2020'/>
-                    )
+                    <div key={index}>
+                        
+                        <h2>{title='Customer Details'}</h2> 
+                        <h3>name={item.name}</h3> 
+                        <h3>location={item.location}</h3>
+                        <h3>email='lampteyphinehas70@gmail.com'</h3>
+                        <h3>status='Active' phone={item.contact}</h3>
+                        <p>joined='10-10-2020'</p>
+                    </div>)
             })}
         </div>
     )
