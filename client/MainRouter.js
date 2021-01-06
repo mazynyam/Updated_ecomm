@@ -21,11 +21,20 @@ import Cart from './cart/Cart'
 import StripeConnect from './user/StripeConnect'
 import ShopOrders from './order/ShopOrders'
 import Order from './order/Order'
+<<<<<<< HEAD
 import CustomerInfo from './admin/pages/CustomerInfo'
 import Footer from './core/Footer'
 import MyProducts from './product/MyProducts'
 import Chat from './chat/Chat'
 
+=======
+import AdminHome from './admin/AdminHome'
+<<<<<<< HEAD
+// import Footer from './core/Footer'
+=======
+import Footer from './core/Footer'
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
+>>>>>>> 041df96c85e649777993eda9178b080b44ad6fdd
 
 const MainRouter = (props) => {
   
@@ -67,6 +76,7 @@ const MainRouter = (props) => {
         <PrivateRoute path="/admin/users" component={Users} />
         <PrivateRoute path='/admin/products/all' component={MyProducts} />
       </Switch>
+<<<<<<< HEAD
     </div>
       <div id="sitewrapper" >
           <Footer/>
@@ -74,6 +84,16 @@ const MainRouter = (props) => {
     </>
     )
 
+=======
+<<<<<<< HEAD
+      
+=======
+      <div id="sitewrapper" >
+          <Footer/>
+      </div>
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
+    </div>)
+>>>>>>> 041df96c85e649777993eda9178b080b44ad6fdd
 }
 
 export default MainRouter

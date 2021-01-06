@@ -7,14 +7,38 @@ import Search from './../product/Search'
 import Categories from './../product/Categories'
 import  {SLIDE_INFO} from '../components/SlideConstant'
 import { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption } from 'reactstrap'
+<<<<<<< HEAD
 import RequestForQuotation from './../components/RequestForQuotation'
+=======
+<<<<<<< HEAD
+import Footer from './Footer'
+=======
+>>>>>>> 041df96c85e649777993eda9178b080b44ad6fdd
 
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     margin: 30,
+<<<<<<< HEAD
+//     position:"fixed",
+//     // width: '160px', /* Set the width of the sidebar */
+ 
+  
+//  overflowX: 'hidden', /* Disable horizontal scroll */
+  
+    
+  
+  
+  },
+  
+  
+ 
+}));
+=======
   }
 }))
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
 
 
 export default function Home(){
@@ -98,15 +122,29 @@ export default function Home(){
   //   }
   // }
     return (
+<<<<<<< HEAD
       <>
        <div className={classes.root}>
+=======
+<<<<<<< HEAD
+      <>
+
+      <div className={classes.root}>
+>>>>>>> 041df96c85e649777993eda9178b080b44ad6fdd
         <Grid container spacing={1}>
         <Grid item xs={4} >
             <Search categories={categories}/>
            
           </Grid>
+<<<<<<< HEAD
           <Grid item xs={2} sm={2}>
             
+=======
+          <Grid item xs={2} sm={2} spacing={1}>
+            
+       
+        
+>>>>>>> 041df96c85e649777993eda9178b080b44ad6fdd
           <h6 id="moneycolour"><span className="fa fa-money fa-lg" id="sellcolour"></span> Make money on Kiriikou</h6>
           
           </Grid>
@@ -125,9 +163,16 @@ export default function Home(){
       
           
           </Grid>
+<<<<<<< HEAD
           
           <Grid container spacing={2}>
 
+=======
+=======
+      <div className={classes.root}>
+        <Grid container spacing={2}>
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
+>>>>>>> 041df96c85e649777993eda9178b080b44ad6fdd
         <Grid item xs={8}>
           <Carousel 
               activeIndex={activeIndex}
@@ -140,9 +185,31 @@ export default function Home(){
               <CarouselControl direction='next' directionText='Next' onClickHandler={next} />
             </Carousel>
           </Grid>
+<<<<<<< HEAD
 
           <Grid  item xs={4} sm={4}>
             <Suggestions  products={suggestions} title={suggestionTitle}/>
+=======
+<<<<<<< HEAD
+          <Grid  item xs={4} sm={4}>
+            <Suggestions  products={suggestions} title={suggestionTitle}/>
+          </Grid>
+          <Grid item xs={8} sm={8}>
+          
+            <Categories categories={categories}/>
+          </Grid> 
+  
+        </Grid>
+   
+      </div>
+      <div id="sitewrapper" >
+      <Footer/>
+  </div>
+  </>
+=======
+          <Grid item xs={4} sm={4}>
+            <Suggestions products={suggestions} title={suggestionTitle}/>
+>>>>>>> 041df96c85e649777993eda9178b080b44ad6fdd
           </Grid>
           <Grid item xs={8} sm={8}>
           
@@ -153,6 +220,7 @@ export default function Home(){
          <RequestForQuotation />
       </Grid>
       </div>
+<<<<<<< HEAD
       
       <div className="button">
               <div className="icon">
@@ -163,5 +231,8 @@ export default function Home(){
           </div>
       </>
 
+=======
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
+>>>>>>> 041df96c85e649777993eda9178b080b44ad6fdd
     )
 }

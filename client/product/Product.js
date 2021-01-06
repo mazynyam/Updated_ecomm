@@ -24,35 +24,70 @@ const useStyles = makeStyles(theme => ({
   },
   subheading: {
     margin: '24px',
+<<<<<<< HEAD
+    // color: theme.palette.openTitle
+    color:'#17293d'
+=======
     color: theme.palette.openTitle
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
   },
   price: {
     padding: '16px',
     margin: '16px 0px',
     display: 'flex',
+<<<<<<< HEAD
+    // backgroundColor: '#93c5ae3d',
+     backgroundColor: '#ACD523',
+    fontSize: '1.3em',
+    color: '#17293d',
+    fontFamily:'Arial Black',
+    fontWeight:'40px',
+    height:"60px",
+    
+
+=======
     backgroundColor: '#93c5ae3d',
     fontSize: '1.3em',
     color: '#375a53',
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
   },
   media: {
     height: 200,
     display: 'inline-block',
     width: '50%',
+<<<<<<< HEAD
+    marginLeft: '24px',
+    
+  },
+  icon: {
+    verticalAlign: 'sub',
+    color:'#ACD523'
+=======
     marginLeft: '24px'
   },
   icon: {
     verticalAlign: 'sub'
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
   },
   link:{
     color: '#3e4c54b3',
     fontSize: '0.9em'
   },
   addCart: {
+<<<<<<< HEAD
+    width: '70px',
+    height: '35px',
+    // padding: '5px 0px',
+    borderRadius: '0.25em',
+    backgroundColor: '#17293d',
+    color:"#ACD523"
+=======
     width: '35px',
     height: '35px',
     padding: '10px 12px',
     borderRadius: '0.25em',
     backgroundColor: '#5f7c8b'
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
   },
   action: {
     margin: '8px 24px',
@@ -111,7 +146,11 @@ export default function Product ({match}) {
                   subheader={product.quantity > 0? 'In Stock': 'Out of Stock'}
                   action={
                     <span className={classes.action}>
+<<<<<<< HEAD
+                    Add to cart  <AddToCart cartStyle={classes.addCart} item={product}/>
+=======
                       <AddToCart cartStyle={classes.addCart} item={product}/>
+>>>>>>> ddfd71fab3f18afc87ba392e3cca9083b5078b31
                     </span>
                   }
                 />
