@@ -31,6 +31,10 @@ const ProductSchema = new mongoose.Schema({
   sku:{
     type:String,
   },
+  promote:{
+    type:Boolean,
+    default:false
+  },
   updated: Date,
   created: {
     type: Date,

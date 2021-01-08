@@ -198,6 +198,17 @@ const increaseQuantity = async (req, res, next) => {
   }
 }
 
+const promoteProduct = async(req, res, next) =>{
+  try {
+    await Product.findByIdAndUpdate(req.product._id, {$set:{"promote":req.body.promote}},{ new: true})
+    .exec()
+    next()
+  } catch (err) {
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err)
+    })
+  }
+}
 export default {
   create,
   productByID,
@@ -212,5 +223,6 @@ export default {
   listCategories,
   list,
   decreaseQuantity,
-  increaseQuantity
+  increaseQuantity,
+  promoteProduct
 }

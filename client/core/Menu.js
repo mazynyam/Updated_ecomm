@@ -1,60 +1,43 @@
-import React, { useState, useEffect} from 'react'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import IconButton from '@material-ui/core/IconButton'
-import InputBase from '@material-ui/core/InputBase'
-import Button from '@material-ui/core/Button'
+import React, { useState, useEffect} from 'react';
+// import PropTypes from 'prop-types'
 import { fade, makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import InputBase from '@material-ui/core/InputBase';
+import Button from '@material-ui/core/Button'
+import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
-
+import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import auth from './../auth/auth-helper'
 import {Link, withRouter} from 'react-router-dom'
-import CartIcon from '@material-ui/icons/ShoppingCart'
-import Badge from '@material-ui/core/Badge'
-import cart from './../cart/cart-helper'
 import logo from './../assets/images/kik.png';
+// import Search from './../product/Search'
+import {  list, listCategories } from './../product/api-product'
+// import Products from './../product/Products'
 
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
-    height:'5px',
-  
-  },
-  toolbr: {
-    
-    height:'33px',
-    margin:"0px",
-    
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   textColor:{
-    // color: ACD523,
-    // listStyle:'none'
-    color:' #acd523',
-    fontFamily:"Arial",
-    fontWeight:"bolder",
-    fontSize:31,
-    listStyle:'none',
-    '&:hover': {
-       color: fade('#acd523', 0.25),
-       },
-       width:'400px',
-       
+    color:'#f4f4f4',
+    listStyle:'none'
   },
   title: {
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
-    marginBottom:'24px',
   },
   search: {
     position: 'relative',
@@ -71,19 +54,7 @@ const useStyles = makeStyles((theme) => ({
       width: 'auto',
     },
   },
-  logincolor:{
-    
-    color:' #acd523',
-    '&:hover': {
-      color: fade('#acd523', 0.25),
-      },
-     
-  },
-  signcolor:{
-    marginBottom:'24px',
-  },
   searchIcon: {
-    
     padding: theme.spacing(0, 2),
     height: '100%',
     position: 'absolute',
@@ -91,8 +62,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color:'#ACD523',
-   
   },
   inputRoot: {
     color: 'inherit',
@@ -120,24 +89,71 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-const isActive = (history, path) => {
-  if (history.location.pathname == path)
 
-  return { color: 'white'}
-    else
-        return { color: '#acd523'}
-   
+const  isActive = (history, path) =>{
+    if(history.location.pathname.includes(path))
+    return { color: '#bef67a'}
+    else{
+        return { color: '#d7ff9a'}
+    }
 }
-
 const isPartActive = (history, path) => {
-  if (history.location.pathname.includes(path))
-    return {color: '#DAFF31'}
-  else
-    return {color: '#ffffff'}
-
+    if (history.location.pathname.includes(path))
+      return {color: '#bef67a'}
+    else
+      return {color: '#bef67a'}
+    
 }
+/**
+ * @todo implement User role on the appbar
+ */
+
+
 const Header = withRouter(({history}) =>{
   
+  const [categories, setCategories] = useState([])
+  useEffect(() => {
+    const abortController = new AbortController()
+    const signal = abortController.signal
+    listCategories(signal).then((data) =>{
+        setCategories(data)
+    })
+    return function cleanup() {
+      abortController.abort()
+    }
+  }, [])
+  
+
+  const [values, setValues] = useState({
+    category: '',
+    search: '',
+    results: [],
+    searched: false
+    })
+    const handleChange = name => event => {
+      setValues({
+        ...values, [name]: event.target.value,
+      })
+    }
+    const search = () => {
+      if(values.search){
+        list({
+          search: values.search || undefined, category: values.category
+        }).then((data) => {
+          if (data.error) {
+            console.log(data.error)
+          } else {
+            setValues({...values, results: data, searched:true})
+          }
+        })
+      }
+    }
+    const enterKey = (event) => {
+      if(event.keyCode === 13){
+        event.preventDefault()
+        search()
+      }
+    }
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -234,11 +250,11 @@ const Header = withRouter(({history}) =>{
 
         {
             !auth.isAuthenticated() && (<span>
-              <Link to="/user/signup" >
+              <Link to="/user/signup">
                 <Button style={isActive(history, "/user/signup")}>Sign up
                 </Button>
               </Link>
-              <Link to="/auth/signin" >
+              <Link to="/auth/signin">
                 <Button style={isActive(history, "/auth/signin")}>Sign In
                 </Button>
               </Link>
@@ -253,45 +269,31 @@ const Header = withRouter(({history}) =>{
       </Menu>
     );
   
-    return (  
+    return (
       <div className={classes.grow}>
-       <AppBar position="static">
+        <AppBar position="static">
           <Toolbar>
-
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="open drawer"
-            >
-              {/* <MenuIcon /> */}
-            </IconButton>
-            <div style={{'display':'flex'}}>
-            <Typography className={classes.title} variant="h6" noWrap >
-              <img src={logo} alt='Logo' height='45'  />
+            
+            <Typography className={classes.title} variant="h6" noWrap>
               <Link to='/' className={classes.textColor}>
-              Kiriikou
+              <img src={logo} alt='Logo' height='50'  />
+              Kiriikou.com
               </Link>
-
-              <Link to="/shops"><Button id="shp" sm="8"> Shops</Button></Link>
-  <Button id="ord" ><span className="fa fa-shopping-cart fa-lg" id="cartcolour"></span> Place an order</Button>
-                        
-  
             </Typography>
-            </div>
-          
+            
             <div className={classes.grow} />
-            <div className={classes.sectionDesktop} className="  col-sm-4">
+            <div className={classes.sectionDesktop}>
             {
             !auth.isAuthenticated() && (<span>
-              <Link to="/user/signup" className={classes.logincolor}>
-                <Button className={classes.signcolor} style={isActive(history, "/user/signup")}>Sign up
+              <Link to="/user/signup">
+                <Button style={isActive(history, "/user/signup")}>Sign up
                 </Button>
               </Link>
-              <Link to="/auth/signin" className={classes.logincolor}>
-                <Button className={classes.signcolor} style={isActive(history, "/auth/signin")}>Sign In
+              <Link to="/auth/signin">
+                <Button style={isActive(history, "/auth/signin")}>Sign In
                 </Button>
               </Link>
+              
             </span>)
           }
           {
@@ -306,18 +308,9 @@ const Header = withRouter(({history}) =>{
                     }}>Sign out</Button>
                 </span>)
               }
-            {
-                auth.isAuthenticated() &&  !auth.isAuthenticated().user.seller && (<span>
-
-                    <Link to="/business/register/new">
-                        <Button style={isActive(history, "/business/register/new")}>Connect to Kiriikou
-                      </Button>
-                    </Link>
-                   
-                </span>)
-              } 
+         
+             
             </div>
-          
             <div className={classes.sectionMobile}>
               <IconButton
                 aria-label="show more"
@@ -333,9 +326,17 @@ const Header = withRouter(({history}) =>{
         </AppBar>
         {renderMobileMenu}
         {renderMenu}
-     
-   </div> );
+      </div>
+    );
 
 })
 
 export default Header;
+
+
+
+
+
+
+
+

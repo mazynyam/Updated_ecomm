@@ -11,6 +11,8 @@ import Icon from '@material-ui/core/Icon'
 import { makeStyles } from '@material-ui/core/styles'
 import {create} from './api-product.js'
 import {Link, Redirect} from 'react-router-dom'
+import { MenuItem } from '@material-ui/core'
+
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -19,6 +21,9 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     marginTop: theme.spacing(5),
     paddingBottom: theme.spacing(2)
+  },
+  menu: {
+    width: 200,
   },
   error: {
     verticalAlign: 'middle'
@@ -117,7 +122,53 @@ export default function NewProduct({match}) {
             className={classes.textField}
             margin="normal"
           /><br/>
-          <TextField id="category" label="Category" className={classes.textField} value={values.category} onChange={handleChange('category')} margin="normal"/><br/>
+          <TextField
+              id="category"
+              select
+              label="Select category"
+              className={classes.textField}
+              value={values.category}
+              onChange={handleChange('category')}
+              SelectProps={{
+                MenuProps: {
+                  className: classes.menu,
+                },
+              }}
+              margin="normal">
+              <MenuItem value={'Agriculture'}>
+                Agriculture
+              </MenuItem>
+              <MenuItem value={'Food & Beverages'}>
+                Food & Beverages
+              </MenuItem>
+              <MenuItem  value={'Art & Craft'}>
+                Art & Craft
+              </MenuItem>
+              <MenuItem value={' Beauty'}>
+                Beauty
+              </MenuItem>
+              <MenuItem value={'Home & Decor'}>
+                Home & Decor
+              </MenuItem>
+              <MenuItem value={'Electrical Appliances'}>
+                Electrical Appliances
+              </MenuItem>
+              <MenuItem value={'Automobiles'}>
+                Automobiles
+              </MenuItem>
+              <MenuItem value={'Phones & Computers'}>
+                Phones & Computers
+              </MenuItem>
+              <MenuItem value={'Fashion & Clothing'}>
+                Fashion & Clothing
+              </MenuItem>
+              <MenuItem value={'Natural Resources'}>
+               Natural Resources
+              </MenuItem>
+             
+        </TextField>
+          {/* <TextField id="category" label="Category" className={classes.textField} value={values.category} onChange={handleChange('category')} margin="normal"/><br/> */}
+          
           <TextField id="quantity" label="Quantity" className={classes.textField} value={values.quantity} onChange={handleChange('quantity')} type="number" margin="normal"/><br/>
           <TextField id="price" label="Price" className={classes.textField} value={values.price} onChange={handleChange('price')} type="number" margin="normal"/><br/>
           <TextField id="sku" label="Sku" className={classes.textField} value={values.sku} onChange={handleChange('sku')} type="text" margin="normal"/><br/>

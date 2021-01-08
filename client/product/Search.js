@@ -9,51 +9,36 @@ import Button from '@material-ui/core/Button'
 import SearchIcon from '@material-ui/icons/Search'
 import {list} from './api-product.js'
 import Products from './Products'
-
-import { fade} from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
 
+  card: {
+    margin: 'auto',
+    textAlign: 'center',
+    backgroundColor: 'transparent'
+  },
   menu: {
     width: 200,
   },
-  browse:{
-    color:'#17293d',
-    width: 50,
-  },
-  // textField: {
-  //   marginLeft: theme.spacing(1),
-  //   marginRight: theme.spacing(1),
-  //   width: 130,
-  //   verticalAlign: 'center',
-  //   marginBottom: '80px',
-  //   marginTop:'0px',
-  //   marginLeft:'80px',
-  // },
-  // searchField: {
-  //   marginLeft: theme.spacing(1),
-  //   marginRight: theme.spacing(1),
-  //   width: 130,
-  //   marginBottom: '200px',
-  //   verticalAlign: 'center',
-  //   marginTop:'0px',
-   
-
-  // },
-  searchButton: {
-    minWidth: '30px',
-    height: '40px',
-    padding: '0 0px',
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 130,
+    verticalAlign: 'bottom',
     marginBottom: '20px',
-    color:'#ACD523',
-    backgroundColor:'#fff',
-    '&:hover': {
-      backgroundColor: fade('#fff', 0.4),
-      borderColor:'#fff',
-      },
-    marginTop:'25px',
-   
-    // marginLeft:'250px',
-    // verticalAlign: 'center',
+    
+  },
+  searchField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+    marginBottom: '20px',
+    color:'#fff'
+  },
+  searchButton: {
+    minWidth: '20px',
+    height: '30px',
+    padding: '0 8px',
+    marginBottom: '20px'
   }
 }))
 
@@ -91,51 +76,45 @@ export default function Search(props) {
   }
     return (
       <div>
-        <Card id="srcCard">
-          {/* <span className={classes.browse}><h6>Browse categories:</h6></span> */}
-          
-          <TextField
-            id="select-category"
-            select
-            label="Shop by category"
-            className="textField"
-            id="textField"
-            label="Select category"
-            className={classes.textField}
-            value={values.category}
-            onChange={handleChange('category')}
-            SelectProps={{
-              MenuProps: {
-                className: classes.menu,
-              },
-            }}
-            margin="normal">
-            <MenuItem value="All">
-              All
+      <Card className={classes.card} spacing={1}>
+        <TextField
+          id="select-category"
+          select
+          label="Select category"
+          className={classes.textField}
+          value={values.category}
+          onChange={handleChange('category')}
+          SelectProps={{
+            MenuProps: {
+              className: classes.menu,
+            },
+          }}
+          margin="normal">
+          <MenuItem value="All">
+            All
+          </MenuItem>
+          { props.categories.map(option => (
+            <MenuItem key={option} value={option}>
+              {option}
             </MenuItem>
-            { props.categories.map(option => (
-              <MenuItem key={option} value={option}>
-                {option}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            id="search"
-            label="Search products"
-            type="search"
-            onKeyDown={enterKey}
-            onChange={handleChange('search')}
-            className="searchField"
-          
-            margin="normal"
-          />
-          <Button variant="contained" color={'primary'} className={classes.searchButton} onClick={search}>
-            <SearchIcon/>
-          </Button>
-          <Divider/>
-          <Products products={values.results} searched={values.searched}/>
-        </Card>
-      </div>
+          ))}
+        </TextField>
+        <TextField
+          id="search"
+          label="Search products"
+          type="search"
+          onKeyDown={enterKey}
+          onChange={handleChange('search')}
+          className={classes.searchField}
+          margin="normal"
+        />
+        <Button variant="contained" color={'primary'} className={classes.searchButton} onClick={search}>
+          <SearchIcon/>
+        </Button>
+        <Divider/>
+        <Products products={values.results} searched={values.searched}/>
+      </Card>
+    </div>
     )
 }
 Search.propTypes = {

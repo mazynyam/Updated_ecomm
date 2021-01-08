@@ -21,7 +21,7 @@ import Cart from './cart/Cart'
 import StripeConnect from './user/StripeConnect'
 import ShopOrders from './order/ShopOrders'
 import Order from './order/Order'
-
+import PlaceARequestForm from './components/PlaceARequestForm'
 import CustomerInfo from './admin/pages/CustomerInfo'
 import Footer from './core/Footer'
 import MyProducts from './product/MyProducts'
@@ -49,7 +49,7 @@ const MainRouter = (props) => {
         <Route path="/auth/admin/signin" component={AdminSignin}/>
         <PrivateRoute path="/user/edit/:userId" component={EditProfile}/>
         <Route path="/user/:userId" component={Profile}/>
-        {/* <Route path='/admin-home' component={AdminHome} /> */}
+        <Route path='/place-request/get-started' component={PlaceARequestForm} />
 
         <Route path="/cart" component={Cart}/>
         <Route path="/product/:productId" component={Product}/>
