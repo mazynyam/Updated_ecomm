@@ -136,7 +136,7 @@ export default function Product ({match}) {
                     <span className={classes.price}>$ {product.price}</span>
                     <Link to={'/shops/'+product.shop._id} className={classes.link}>
                       <span>
-                        <Icon className={classes.icon}>shopping_basket</Icon> {product.shop.name}
+                        <Icon className={classes.icon}>shopping_basket</Icon> {product.shop.business_name}
                       </span>
                     </Link>
                   </Typography>

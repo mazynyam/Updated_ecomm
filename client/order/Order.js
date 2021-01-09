@@ -148,7 +148,7 @@ export default function Order({match}) {
                             <Link to={'/product/'+item.product._id}><Typography type="title" component="h3" className={classes.productTitle} color="primary">{item.product.name}</Typography></Link>
                             <Typography type="subheading" component="h3" className={classes.itemShop} color="primary">$ {item.product.price} x {item.quantity}</Typography>
                             <span className={classes.itemTotal}>${item.product.price * item.quantity}</span>
-                            <span className={classes.itemShop}>Shop: {item.shop.name}</span>
+                            <span className={classes.itemShop}>Shop: {item.shop.business_name}</span>
                             <Typography type="subheading" component="h3" color={item.status == "Cancelled" ? "error":"secondary"}>Status: {item.status}</Typography>
                           </CardContent>
                         </div>

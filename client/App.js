@@ -5,6 +5,7 @@ import { ThemeProvider } from '@material-ui/styles'
 import theme from './theme'
 import { hot } from 'react-hot-loader'
 import './App.css'
+import './admin/scss/style.scss'
 
 
 

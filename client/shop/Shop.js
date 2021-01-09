@@ -103,13 +103,17 @@ export default function Shop({match}) {
           <Card className={classes.card}>
             <CardContent>
               <Typography type="headline" component="h2" className={classes.title}>
-                {shop.name}
+                {shop.business_name}
               </Typography>
               <br/>
               <Avatar src={logoUrl} className={classes.bigAvatar}/><br/>
                 <Typography type="subheading" component="h2" className={classes.subheading}>
                   {shop.description}
                 </Typography><br/>
+                <Typography type="headline" component="h2" className={classes.title}>
+                Call {shop.business_mobile} / {shop.business_mobile_contact}
+              </Typography>
+              {shop.is_business_registered ? (<Typography><i className="fa fa-check" color="primary" aria-hidden="true"></i>Verified</Typography>) : (<Typography>Not Verified</Typography>)}
             </CardContent>
           </Card>
         </Grid>

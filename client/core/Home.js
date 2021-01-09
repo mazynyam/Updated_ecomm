@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Suggestions from './../product/Suggestions'
-import {listLatest, listCategories, listRelated} from './../product/api-product.js'
+import {listLatest, listCategories} from './../product/api-product.js'
 import Search from './../product/Search'
 import Categories from './../product/Categories'
 import  {SLIDE_INFO} from '../components/SlideConstant'
@@ -26,7 +26,6 @@ export default function Home(){
   const classes = useStyles()
   const [suggestionTitle, setSuggestionTitle] = useState("Latest Products")
   const [categories, setCategories] = useState([])
-  const [related, setRelated] = useState([])
   const [suggestions, setSuggestions] = useState([])
   const [animating, setAnimating] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)

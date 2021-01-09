@@ -119,7 +119,7 @@ export default function Suggestions (props) {
                     <Link to={'/product/'+item._id}><Typography variant="h3" component="h3" className={classes.productTitle} color="primary">{item.name}</Typography></Link>
                     <Link to={'/shops/'+item.shop._id}>
                       <Typography type="subheading" className={classes.subheading}>
-                        <Icon className={classes.icon}>shopping_basket</Icon> {item.shop.name}
+                        <Icon className={classes.icon}>shopping_basket</Icon> {item.shop.business_name}
                       </Typography>
                     </Link>
                     <Typography component="p" className={classes.date}>

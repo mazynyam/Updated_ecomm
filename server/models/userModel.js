@@ -29,7 +29,8 @@ const UserSchema = new mongoose.Schema({
   },
   phone:{
     type:String,
-    trim: true
+    required:true,
+    unique: 'Phone already exists',
   },
   salt: String,
   updated: Date,

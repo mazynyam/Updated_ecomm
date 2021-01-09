@@ -1,21 +1,17 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    margin: 30,
-  }
-}))
-
+import Header from './pages/Header'
+import Menu from './pages/Menu'
+import Footer from './pages/Footer'
 
 export default function AdminHome(){
-    const classes = useStyles()
-    
+ 
     return (
-      <div className={classes.root}>
-        
+      <div class="hold-transition sidebar-mini layout-fixed">
+      <div className='wrapper'>
+        <Header />
+        <Menu />
+        <Footer />
+      </div>
       </div>
     )
 }

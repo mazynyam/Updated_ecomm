@@ -1,4 +1,5 @@
 import express from 'express'
+import session from 'express-session'
 import path from 'path'
 import auth from './../client/auth/auth-helper'
 import bodyParser from 'body-parser'
@@ -15,19 +16,19 @@ import orderRoutes from './routes/order.routes'
 import Chat from './models/chatModel'
 import queryString from 'querystring'
 
-
 // modules for server side rendering
 import React from 'react'
-import ReactDOMServer from 'react-dom/server'
+// import ReactDOMServer from 'react-dom/server'
+import { renderToStringAsync } from 'react-async-ssr'
 import MainRouter from './../client/MainRouter'
 import { StaticRouter } from 'react-router-dom'
-
+import config from './../config/config'
 import { ServerStyleSheets, ThemeProvider } from '@material-ui/styles'
 import theme from './../client/theme'
 //end
 
 //comment out before building for production
-// import devBundle from './devBundle'
+import devBundle from './devBundle'
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./../client/chat/users')
 
@@ -37,7 +38,7 @@ const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 //comment out before building for production
-// devBundle.compile(app)
+devBundle.compile(app)
 
 // parse body params and attache them to req.body
 app.use(bodyParser.json())
@@ -47,8 +48,14 @@ app.use(compress())
 // secure apps by setting various HTTP headers
 app.use(helmet())
 // enable CORS - Cross Origin Resource Sharing
-app.use(cors())
-
+app.use(cors({credentials:true}))
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: config.jwtSecret,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
 app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 
 io.on('connection', socket => {
@@ -108,6 +115,7 @@ app.use('/', authRoutes)
 app.use('/', shopRoutes)
 app.use('/', productRoutes)
 app.use('/', orderRoutes)
+// app.use('/kiriikou-admin', adminBro)
 
 app.get('*', (req, res) => {
   const sheets = new ServerStyleSheets()
@@ -122,7 +130,7 @@ app.get('*', (req, res) => {
       name = 'Home'
       break;
   }
-  const markup = ReactDOMServer.renderToString(
+  const markup =  renderToStringAsync (
     sheets.collect(
       <StaticRouter location={req.url} context={context}>
           <ThemeProvider theme={theme}>

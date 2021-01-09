@@ -45,13 +45,13 @@ export default function Signup() {
   const classes = useStyles()
   const [values, setValues] = useState({
     name: '',
-    password: '',
+    hashed_password: '',
     email: '',
     phone: '',
     open: false,
     error: ''
   })
-  const name = 'Signup';
+  
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value })
   }
@@ -60,8 +60,7 @@ export default function Signup() {
     const user = {
       name: values.name || undefined,
       email: values.email || undefined,
-      password: values.password || undefined,
-     
+      hashed_password: values.hashed_password || undefined,
       phone: values.password || undefined
     }
     create(user).then((data) => {
@@ -81,7 +80,7 @@ export default function Signup() {
           <TextField id="name" label="Name" className={classes.textField} value={values.name} onChange={handleChange('name')} margin="normal"/><br/>
           <TextField id="email" type="email" label="Email" className={classes.textField} value={values.email} onChange={handleChange('email')} margin="normal"/><br/>
           <TextField id="phone" type="text" label="Phone" className={classes.textField} value={values.phone} onChange={handleChange('phone')} margin="normal"/>
-          <TextField id="password" type="password" label="Password" className={classes.textField} value={values.password} onChange={handleChange('password')} margin="normal"/>
+          <TextField id="hashed_password" type="password" label="Password" className={classes.textField} value={values.hashed_password} onChange={handleChange('hashed_password')} margin="normal"/>
           <br/> {
             values.error && (<Typography component="p" color="error">
               <Icon color="error" className={classes.error}>error</Icon>

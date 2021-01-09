@@ -8,6 +8,7 @@ import AdminSignin from './auth/AdminSignin'
 import EditProfile from './user/EditProfile'
 import Profile from './user/Profile'
 import PrivateRoute from './auth/PrivateRoute'
+import AdminPrivateRoute from './auth/AdminPrivateRoute'
 import Header from './core/Menu'
 import NewShop from './shop/NewShop'
 import Shops from './shop/Shops'
@@ -21,32 +22,44 @@ import Cart from './cart/Cart'
 import StripeConnect from './user/StripeConnect'
 import ShopOrders from './order/ShopOrders'
 import Order from './order/Order'
-import PlaceARequestForm from './components/PlaceARequestForm'
-import CustomerInfo from './admin/pages/CustomerInfo'
+import PlaceARequestForm from './request/PlaceARequestForm'
 import Footer from './core/Footer'
 import MyProducts from './product/MyProducts'
 import Chat from './chat/Chat'
-
-
 import AdminHome from './admin/AdminHome'
-// import Footer from './core/Footer'
 
+const loading = (
+  <div className='pt-3 text-center'>
+    <div className='sk-spinner sk-spinner-pulse'></div>
+  </div>
+)
+
+const TheLayout = React.lazy(() => import('./admin/containers/TheLayout'))
+
+// Pages
+const Login = React.lazy(() => import('./admin/views/pages/login/Login'));
+const Register = React.lazy(() => import('./admin/views/pages/register/Register'));
+const Page404 = React.lazy(() => import('./admin/views/pages/page404/Page404'));
+const Page500 = React.lazy(() => import('./admin/views/pages/page500/Page500'));
+// const Dashboard = React.lazy(() => import('./admin/views/dashboard/Dashboard'))
 
 const MainRouter = (props) => {
   
   return (
       <>
       <div>
-
       <Header/>
-      {/* <Navbar /> */}
-      
-      <Switch>
+      <React.Suspense fallback={loading}>
+        <Switch>
         <Route exact path="/" component={Home}/>
         <Route path="/users" component={Users}/>
         <Route path="/user/signup" component={Signup}/>
         <Route path="/auth/signin" component={Signin}/>
-        <Route path="/auth/admin/signin" component={AdminSignin}/>
+        <Route path="/auth/admin/signin" component={Login}/>
+        <Route path="/admin/404" component={Page404}/>
+        <Route path="/admin/500" component={Page500}/>
+        <Route path="/admin/signup" component={Register}/>
+
         <PrivateRoute path="/user/edit/:userId" component={EditProfile}/>
         <Route path="/user/:userId" component={Profile}/>
         <Route path='/place-request/get-started' component={PlaceARequestForm} />
@@ -68,10 +81,12 @@ const MainRouter = (props) => {
         <PrivateRoute path="/seller/:shopId/:productId/edit" component={EditProduct}/>
 
         <Route path="/seller/stripe/connect" component={StripeConnect}/>
-
-        <PrivateRoute path="/admin/users" component={Users} />
-        <PrivateRoute path='/admin/products/all' component={MyProducts} />
+        <AdminPrivateRoute path="/kiriikou-admin" component={TheLayout} />
+        
+        <AdminPrivateRoute path="/admin/users" component={Users} />
+        <AdminPrivateRoute path='/admin/products/all' component={MyProducts} />
       </Switch>
+      </React.Suspense>
 
     </div>
       <div id="sitewrapper" >

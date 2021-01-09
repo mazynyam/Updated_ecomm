@@ -38,6 +38,10 @@ const RequestSchema = new mongoose.Schema({
       default:'Card',
       enum:['Cash','Bank Transfer', 'Mobile Money', 'Card']
   },
+  image:{
+    data:Buffer,
+    contentType:String
+  },
   payment_id: {},
   updated: Date,
   created: {
@@ -49,4 +53,4 @@ const RequestSchema = new mongoose.Schema({
 
 const Request = mongoose.model('Request', RequestSchema)
 
-export {Request}
+export default Request
