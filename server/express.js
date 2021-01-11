@@ -28,7 +28,7 @@ import theme from './../client/theme'
 //end
 
 //comment out before building for production
-import devBundle from './devBundle'
+// import devBundle from './devBundle'
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./../client/chat/users')
 
@@ -38,7 +38,7 @@ const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 //comment out before building for production
-devBundle.compile(app)
+// devBundle.compile(app)
 
 // parse body params and attache them to req.body
 app.use(bodyParser.json())
