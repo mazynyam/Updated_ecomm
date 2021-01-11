@@ -110,7 +110,8 @@
       "last 1 safari version"
     ],
     "browser": {
-      "http": false
+      "http": false,
+      "fs": false
     }
   }
 }
