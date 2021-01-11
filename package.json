@@ -111,7 +111,9 @@
     ],
     "browser": {
       "http": false,
-      "fs": false
+      "fs": false,
+      "path": false,
+      "os": false
     }
   }
 }
