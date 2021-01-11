@@ -11,6 +11,7 @@ const config = {
   stripe_connect_test_client_id: "",
   stripe_test_secret_key: "",
   stripe_test_api_key: "",
+  sendgrid_api_key:'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'
 }
 
 export default config

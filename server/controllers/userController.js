@@ -21,6 +21,29 @@ const create = async (req, res) => {
   }
 }
 
+const verifyEmail = async(req, res, next)=>{
+  try {
+    const user = await User.findOne({ emailToken: req.query.token })
+    if(!user){
+      req.flash('error', 'Token is invalid, Please contact for assistance')
+      return res.redirect('/')
+    }
+    user.emailToken = null;
+    user.isVerified = true;
+    await user.save()
+    await req.login(user, async(err)=>{
+      if(err) return next(err)
+      req.flash('success', `Welcome to Kiriikou B2B Ecommerce ${user.name}`)
+      const rediretUrl = req.session.redirectTo || '/';
+      delete req.session.redirectTo;
+      res.redirect(rediretUrl)
+    })
+  } catch (error) {
+    console.log(error)
+    req.flash('error', 'Something went wrong, Please contact for assistance')
+    req.redirect('/')
+  }
+}
 /**
  * Load user and append to req.
  */
@@ -193,5 +216,6 @@ export default {
   Admin,
   stripe_auth,
   stripeCustomer,
-  createCharge
+  createCharge,
+  verifyEmail
 }

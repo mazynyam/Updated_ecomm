@@ -47,6 +47,12 @@ const UserSchema = new mongoose.Schema({
   isAdmin:{
     type:Boolean,
     default:false
+  },
+  emailToken:{
+    type:String
+  },
+  isVerified:{
+    type:Boolean
   }
 })
 

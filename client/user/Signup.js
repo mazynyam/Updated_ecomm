@@ -14,6 +14,9 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import {Link} from 'react-router-dom'
+import crypto from 'crypto'
+import config from './../../config/config'
+const sgmail = require('@sendgrid/mail')
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -48,10 +51,13 @@ export default function Signup() {
     hashed_password: '',
     email: '',
     phone: '',
+    emailToken: crypto.randomBytes(64).toString('hex'),
+    isVerified:false,
     open: false,
     error: ''
   })
-  
+  sgmail.setApiKey(config.sendgrid_api_key)
+
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value })
   }
@@ -61,7 +67,9 @@ export default function Signup() {
       name: values.name || undefined,
       email: values.email || undefined,
       hashed_password: values.hashed_password || undefined,
-      phone: values.password || undefined
+      phone: values.password || undefined,
+      emailToken:values.emailToken,
+      isVerified:values.isVerified
     }
     create(user).then((data) => {
       if (data.error) {
@@ -69,6 +77,33 @@ export default function Signup() {
       } else {
         setValues({ ...values, error: '', open: true})
       }
+      const msg = {
+        from:'phinehas499@gmail.com',
+        to:user.email,
+        subject:'Kiriikou - Verify your email',
+        text:`Thank you for registering with us.
+        Please click on the link to verify your account.
+        http://${req.headers.host}/verify-email?${user.emailToken}`,
+        html:`
+        <h1>Hello ${user.name}</h1>
+        <p>
+        Thank you for registering with us.
+        Please click on the link to verify your account.
+        http://${req.headers.host}/verify-email?${user.emailToken}
+        </p>
+        `
+      }
+      (async()=>{
+        try {
+          await sgmail.send(msg)
+          req.flash('success', 'Thanks for registering. Please check your email to verify your accouny')
+          res.redirect('/')
+        } catch (error) {
+          console.log(error)
+          req.flash('error', 'Something went wrong, Please contact support@kiriikou.com')
+          req.redirect('/')
+        }
+      })();
     })
   }   
     return (<div>
@@ -99,9 +134,9 @@ export default function Signup() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Link to="/auth/signin">
+          <Link to="/verify-email">
             <Button color="primary" autoFocus="autoFocus" variant="contained">
-              Sign In
+              Verify Account
             </Button>
           </Link>
         </DialogActions>
