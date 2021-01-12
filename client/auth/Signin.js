@@ -67,7 +67,12 @@ export default function Signin(props) {
         setValues({ ...values, error: data.error})
       } else {
         auth.authenticate(data, () => {
-          setValues({ ...values, error: '',redirectToReferrer: true})
+          if(user.isVerified === true){
+            setValues({ ...values, error: '',redirectToReferrer: true})
+          }
+          else{
+            return( <Redirect to='/verify-email' />)
+          }
         })
       }
     })
@@ -106,7 +111,7 @@ export default function Signin(props) {
         </CardContent>
         <CardActions>
         <Button color="primary" variant="contained" onClick={clickSubmit} className={classes.submit}>Login</Button>
-        <Link color='secondary' to='/forgot-password'>Forgot Password?</Link>
+        <Link color='primary' to="/forgot">Forgot Password?</Link>
         </CardActions>
       </Card>
     )

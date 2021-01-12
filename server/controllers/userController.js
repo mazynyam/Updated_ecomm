@@ -4,13 +4,41 @@ import errorHandler from '../helpers/dbErrorHandler'
 import request from 'request'
 import config from '../../config/config'
 import stripe from 'stripe'
+import sgmail from '@sendgrid/mail'
 
 const myStripe = stripe(config.stripe_test_secret_key)
-
+sgmail.setApiKey(config.sendgrid_api_key)
 const create = async (req, res) => {
   const user = new User(req.body)
   try {
     await user.save()
+    const msg = {
+      from:`${config.email_address}`,
+      to:user.email,
+      subject:'Kiriikou - Verify your email',
+      text:`Thank you for registering with us.
+      Please click on the link to verify your account.
+      http://${req.headers.host}/verify-email?${user.emailToken}`,
+      html:`
+      <h1>Hello ${user.name}</h1>
+      <p>
+      Thank you for registering with us.
+      Please click on the link to verify your account.
+      http://${req.headers.host}/verify-email?${user.emailToken}
+      </p>
+      `
+    }
+    (async()=>{
+      try {
+        await sgmail.send(msg)
+        req.flash('success', 'Thanks for registering. Please check your email to verify your accouny')
+        res.redirect('/')
+      } catch (error) {
+        console.log(error)
+        req.flash('error', 'Something went wrong, Please contact support@kiriikou.com')
+        req.redirect('/')
+      }
+    })();
     return res.status(200).json({
       message: "Successfully signed up!"
     })
@@ -19,8 +47,65 @@ const create = async (req, res) => {
       error: errorHandler.getErrorMessage(err)
     })
   }
+ 
+  
 }
+const resetPassword = async(req, res, next)=>{
+  async.waterfall([
+    function(done) {
+      crypto.randomBytes(20, function(err, buf) {
+        var token = buf.toString('hex');
+        done(err, token);
+      });
+    },
+    function(token, done) {
+      User.findOne({ email: req.body.email }, function(err, user) {
+        if (!user) {
+          req.flash('error', 'No account with that email address exists.');
+          return res.redirect('/forgot');
+        }
 
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+        user.save(function(err) {
+          done(err, token, user);
+        });
+      });
+    },
+    function(token, user, done) {
+      
+      let msg = {
+        to: user.email,
+        from: `${config.email_address}`,
+        subject: 'Kiriikou Password Reset',
+        text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+          'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+          'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+          'If you did not request this, please ignore this email and your password will remain unchanged.\n',
+        html:`<p>You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n
+          Please click on the following link, or paste this into your browser to complete the process:\n\n
+          http://' ${req.headers.host}/reset/${ token }\n\n
+          If you did not request this, please ignore this email and your password will remain unchanged.\n'</p>`
+      };
+      (async()=>{
+        try {
+          await sgmail.send(msg)
+          req.flash('success', `A Password Reset sent to ${user.email} `)
+          done(err, 'done')
+          res.redirect('/')
+        } catch (error) {
+          console.log(error)
+          req.flash('error', 'Something went wrong, Please contact support@kiriikou.com')
+          req.redirect('/')
+        }
+      })();
+    }
+  ], function(err) {
+    if (err) return next(err);
+    res.redirect('/forgot');
+  });
+}
 const verifyEmail = async(req, res, next)=>{
   try {
     const user = await User.findOne({ emailToken: req.query.token })
@@ -94,6 +179,7 @@ const update = async (req, res) => {
       error: errorHandler.getErrorMessage(err)
     })
   }
+
 }
 
 const remove = async (req, res) => {
@@ -217,5 +303,6 @@ export default {
   stripe_auth,
   stripeCustomer,
   createCharge,
-  verifyEmail
+  verifyEmail,
+  resetPassword 
 }

@@ -15,8 +15,9 @@ import {
   CRow
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
+import {adminSignin} from './../../../../auth/api-auth'
 
-const Login = () => {
+const Login = (props) => {
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -29,8 +30,8 @@ const Login = () => {
       password: values.password || undefined
     }
 
-    signin(user).then((data) => {
-      if (data.error) {
+    adminSignin(user).then((data) => {
+      if (data) {
         setValues({ ...values, error: data.error})
       } else {
         auth.authenticate(data, () => {
@@ -84,12 +85,13 @@ const Login = () => {
                       <CCol xs="6">
                         <CButton color="primary" onClick={clickSubmit} className="px-4">Login</CButton>
                       </CCol>
-                      {/* <CCol xs="6" className="text-right">
+                      <CCol xs="6" className="text-right">
                         <CButton color="link" className="px-0">Forgot password?</CButton>
-                      </CCol> */}
+                      </CCol>
                     </CRow>
                   </CForm>
                 </CCardBody>
+                
               </CCard>
               <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
                 <CCardBody className="text-center">

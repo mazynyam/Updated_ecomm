@@ -62,7 +62,7 @@ const hasAuthorization = (req, res, next) => {
 }
 
 const AdminSignin = async(req, res, next)=>{
-  if(req.user && req.user.isAdmin){
+  if(req.user && req.user.isAdmin === true){
     next()
   }
   else{

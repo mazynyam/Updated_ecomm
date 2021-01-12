@@ -15,8 +15,8 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import {Link} from 'react-router-dom'
 import crypto from 'crypto'
-import config from './../../config/config'
-const sgmail = require('@sendgrid/mail')
+
+
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -48,7 +48,7 @@ export default function Signup() {
   const classes = useStyles()
   const [values, setValues] = useState({
     name: '',
-    hashed_password: '',
+    password: '',
     email: '',
     phone: '',
     emailToken: crypto.randomBytes(64).toString('hex'),
@@ -56,7 +56,7 @@ export default function Signup() {
     open: false,
     error: ''
   })
-  sgmail.setApiKey(config.sendgrid_api_key)
+  
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value })
@@ -66,44 +66,18 @@ export default function Signup() {
     const user = {
       name: values.name || undefined,
       email: values.email || undefined,
-      hashed_password: values.hashed_password || undefined,
+      password: values.password || undefined,
       phone: values.password || undefined,
       emailToken:values.emailToken,
       isVerified:values.isVerified
     }
     create(user).then((data) => {
-      if (data.error) {
+      if (data) {
         setValues({ ...values, error: data.error})
       } else {
         setValues({ ...values, error: '', open: true})
       }
-      const msg = {
-        from:'phinehas499@gmail.com',
-        to:user.email,
-        subject:'Kiriikou - Verify your email',
-        text:`Thank you for registering with us.
-        Please click on the link to verify your account.
-        http://${req.headers.host}/verify-email?${user.emailToken}`,
-        html:`
-        <h1>Hello ${user.name}</h1>
-        <p>
-        Thank you for registering with us.
-        Please click on the link to verify your account.
-        http://${req.headers.host}/verify-email?${user.emailToken}
-        </p>
-        `
-      }
-      (async()=>{
-        try {
-          await sgmail.send(msg)
-          req.flash('success', 'Thanks for registering. Please check your email to verify your accouny')
-          res.redirect('/')
-        } catch (error) {
-          console.log(error)
-          req.flash('error', 'Something went wrong, Please contact support@kiriikou.com')
-          req.redirect('/')
-        }
-      })();
+      
     })
   }   
     return (<div>
@@ -115,7 +89,7 @@ export default function Signup() {
           <TextField id="name" label="Name" className={classes.textField} value={values.name} onChange={handleChange('name')} margin="normal"/><br/>
           <TextField id="email" type="email" label="Email" className={classes.textField} value={values.email} onChange={handleChange('email')} margin="normal"/><br/>
           <TextField id="phone" type="text" label="Phone" className={classes.textField} value={values.phone} onChange={handleChange('phone')} margin="normal"/>
-          <TextField id="hashed_password" type="password" label="Password" className={classes.textField} value={values.hashed_password} onChange={handleChange('hashed_password')} margin="normal"/>
+          <TextField id="password" type="password" label="Password" className={classes.textField} value={values.password} onChange={handleChange('password')} margin="normal"/>
           <br/> {
             values.error && (<Typography component="p" color="error">
               <Icon color="error" className={classes.error}>error</Icon>

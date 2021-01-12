@@ -12,8 +12,8 @@ import 'font-awesome/css/font-awesome.css';
 import 'bootstrap-social/bootstrap-social.css';
 import { Provider } from 'react-redux'
 import store from './store'
-import { icons } from './admin/assets/icons'
-React.icons = icons
+
+
 hydrate(
     <Provider store={store}>
         <App/>

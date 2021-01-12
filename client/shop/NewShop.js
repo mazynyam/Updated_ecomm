@@ -75,7 +75,7 @@ export default function NewBusiness(){
 
     const handleChange = name => event => {
         const value = name === 'business_certificate' || name === 'identity_card_front' || name === 'identity_card_back'
-          ? event.target.files[0]
+          ? event.target.files[0] || event.target.files[1] || event.target.files[2]
           : event.target.value
         setValues({...values, [name]: value })
 
@@ -196,7 +196,7 @@ export default function NewBusiness(){
                                 </Button>
                             </label> <span className={classes.filename}>{values.identity_card_front ? values.identity_card_front.name : ''}</span><br/>
                          
-                         <input accept="image/*" onChange={handleImage('identity_card_back')} className={classes.input} id="icon-button-file" type="file" />
+                         <input accept="image/*" onChange={handleChange('identity_card_back')} className={classes.input} id="icon-button-file" type="file" />
                               <label htmlFor="icon-button-file">
                                   <Button variant="contained" color="secondary" component="span">
                                   Upload an ID Card Back

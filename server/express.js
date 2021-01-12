@@ -115,22 +115,27 @@ app.use('/', authRoutes)
 app.use('/', shopRoutes)
 app.use('/', productRoutes)
 app.use('/', orderRoutes)
-// app.use('/kiriikou-admin', adminBro)
+
 
 app.get('*', (req, res) => {
   const sheets = new ServerStyleSheets()
   const context = {}
   let name;
-  switch (name) {
-    case queryString.location === '/auth/signin':
-      name = 'Login'
-      case queryString.location === '/user/signup':
-      name = 'Register'
-    default:
-      name = 'Home'
-      break;
-  }
-  const markup =  renderToStringAsync (
+  name = 'Home'
+  // const checkTitle = (req, res)=>{
+  //   switch (name) {
+  //     case queryString.location === `${req.headers.host}/auth/signin`:
+  //       name = 'Login'
+  //       case queryString.location ===  `${req.headers.host}'/user/signup`:
+  //       name = 'Register'
+  //     default:
+  //       name = 'Home'
+  //       break;
+  //   }
+  // }
+  // checkTitle(name)
+
+  const  markup =  renderToStringAsync  (
     sheets.collect(
       <StaticRouter location={req.url} context={context}>
           <ThemeProvider theme={theme}>

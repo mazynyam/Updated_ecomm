@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@admin-bro/express": "^3.0.1",
-    "@admin-bro/mongoose": "^1.1.0",
+    "-": "0.0.1",
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
@@ -19,14 +18,11 @@
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
     "@sendgrid/mail": "^7.4.1",
-    "@testing-library/jest-dom": "^5.11.8",
-    "@testing-library/react": "^11.2.3",
-    "@testing-library/user-event": "^12.6.0",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.3.2",
     "accesscontrol": "^2.2.1",
-    "admin-bro": "^3.3.1",
     "auto-changelog": "~2.2.1",
     "babel-loader": "^8.2.2",
+    "babel-plugin-css-modules-transform": "^1.6.2",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.5.3",
@@ -72,7 +68,7 @@
     "request": "^2.88.2",
     "sass": "^1.32.2",
     "sass-loader": "^10.1.0",
-    "sendgrid": "^5.2.3",
+    "save-dev": "0.0.1-security",
     "socket.io": "^2.4.1",
     "socket.io-client": "^3.0.5",
     "stripe": "^8.130.0",
@@ -108,12 +104,12 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ],
-    "browser": {
-      "http": false,
-      "fs": false,
-      "path": false,
-      "os": false
-    }
+    ]
+  },
+  "browser": {
+    "http": false,
+    "fs": false,
+    "path": false,
+    "os": false
   }
 }

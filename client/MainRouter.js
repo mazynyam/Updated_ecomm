@@ -4,7 +4,6 @@ import Home from './core/Home'
 import Users from './user/Users'
 import Signup from './user/Signup'
 import Signin from './auth/Signin'
-import AdminSignin from './auth/AdminSignin'
 import EditProfile from './user/EditProfile'
 import Profile from './user/Profile'
 import PrivateRoute from './auth/PrivateRoute'
@@ -26,21 +25,31 @@ import PlaceARequestForm from './request/PlaceARequestForm'
 import Footer from './core/Footer'
 import MyProducts from './product/MyProducts'
 import Chat from './chat/Chat'
-import AdminHome from './admin/AdminHome'
 
-const loading = (
-  <div className='pt-3 text-center'>
-    <div className='sk-spinner sk-spinner-pulse'></div>
-  </div>
-)
+
+const Loading = () =>{
+  return(
+  <div className="lds-roller">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <p>Loading</p>
+    </div>
+  )
+}
 
 const TheLayout = React.lazy(() => import('./admin/containers/TheLayout'))
 
 // Pages
-const Login = React.lazy(() => import('./admin/views/pages/login/Login'));
-const Register = React.lazy(() => import('./admin/views/pages/register/Register'));
-const Page404 = React.lazy(() => import('./admin/views/pages/page404/Page404'));
-const Page500 = React.lazy(() => import('./admin/views/pages/page500/Page500'));
+import Login from './admin/views/pages/login/Login'
+import Register from './admin/views/pages/register/Register'
+import Page404 from'./admin/views/pages/page404/Page404'
+import Page500 from'./admin/views/pages/page500/Page500'
 // const Dashboard = React.lazy(() => import('./admin/views/dashboard/Dashboard'))
 
 const MainRouter = (props) => {
@@ -48,8 +57,8 @@ const MainRouter = (props) => {
   return (
       <>
       <div>
-      <Header/>
-      <React.Suspense fallback={loading}>
+      <React.Suspense fallback={Loading}>
+        <Header/>
         <Switch>
         <Route exact path="/" component={Home}/>
         <Route path="/users" component={Users}/>
@@ -82,7 +91,6 @@ const MainRouter = (props) => {
 
         <Route path="/seller/stripe/connect" component={StripeConnect}/>
         <AdminPrivateRoute path="/kiriikou-admin" component={TheLayout} />
-        
         <AdminPrivateRoute path="/admin/users" component={Users} />
         <AdminPrivateRoute path='/admin/products/all' component={MyProducts} />
       </Switch>

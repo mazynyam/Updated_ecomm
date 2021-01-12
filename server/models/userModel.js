@@ -29,8 +29,8 @@ const UserSchema = new mongoose.Schema({
   },
   phone:{
     type:String,
-    required:true,
-    unique: 'Phone already exists',
+    validate: /^$|^\d{10}$/, 
+    required:false
   },
   salt: String,
   updated: Date,
@@ -53,6 +53,12 @@ const UserSchema = new mongoose.Schema({
   },
   isVerified:{
     type:Boolean
+  },
+  resetPasswordToken:{
+    type:String
+  },
+  resetPasswordExpires:{
+    type:Date
   }
 })
 

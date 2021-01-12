@@ -42,7 +42,8 @@ const config = {
                 "sass-loader",
             ],}
         ]
-    }
+    },
+    
 }
 
 module.exports = config
