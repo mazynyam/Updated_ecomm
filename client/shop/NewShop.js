@@ -18,6 +18,7 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
+import Avatar from '@material-ui/core/Avatar'
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -26,6 +27,11 @@ const useStyles = makeStyles(theme => ({
       textAlign: 'center',
       marginTop: theme.spacing(5),
       paddingBottom: theme.spacing(2)
+    },
+    bigAvatar: {
+      width: 60,
+      height: 60,
+      margin: 'auto'
     },
     error: {
       verticalAlign: 'middle'
@@ -69,27 +75,39 @@ export default function NewBusiness(){
         identity_card_back:'',
         redirect: false,
         error: '',
+        image:'',
         open:false
     })
     const jwt = auth.isAuthenticated();
 
     const handleChange = name => event => {
-        const value = name === 'business_certificate' || name === 'identity_card_front' || name === 'identity_card_back'
-          ? event.target.files[0] || event.target.files[1] || event.target.files[2]
-          : event.target.value
-        setValues({...values, [name]: value })
-
+      const value = name === 'image'
+        ? event.target.files[0]
+        : event.target.value
+      setValues({...values,  [name]: value })
     }
-    const handleImage = name => e =>{
-      const pic =  name === 'identity_card_front' || name==='identity_card_back' ? e.target.files[0] : e.target.pic
+    const handleBusinessCert = name => e =>{
+      const pic = name === 'business_certificate' ? e.target.files[0] : e.target.pic
+      setValues({...values, [name]: pic})
+    }
+    const handleIdCardFront = name => e =>{
+      const pic = name === 'identity_card_front' ? e.target.files[0] : e.target.pic
+      setValues({...values, [name]: pic})
+    }
+    const handleIdCardBack = name => e =>{
+      const pic = name === 'identity_card_back' ? e.target.files[0] : e.target.pic
       setValues({...values, [name]: pic})
     }
 
     const handleCheck = (event, checked) => {
         setValues({...values, 'is_business_registered': checked})
       }
+      const logoUrl = values.id
+          ? `/api/shops/logo/${values.id}?${new Date().getTime()}`
+          : '/api/shops/defaultphoto'
     const clickSubmit = () => {
         let businessData  = new FormData()
+        values.image && businessData.append('image', values.image)
         values.business_name && businessData.append('business_name', values.business_name)
         values.region_of_business && businessData.append('region_of_business', values.region_of_business)
         values.city_of_business && businessData.append('city_of_business', values.city_of_business)
@@ -126,6 +144,15 @@ export default function NewBusiness(){
         <Card className={classes.card}>
             <CardContent>
                 <Typography type='headline' component='h2' className={classes.title}>New Shop Registration</Typography>
+                <Avatar src={logoUrl} className={classes.bigAvatar}/><br/>
+              <input accept="image/*" onChange={handleChange('image')} className={classes.input} id="icon-button-file" type="file" />
+              <label htmlFor="icon-button-file">
+                <Button variant="contained" color="default" component="span">
+                  Upload Logo
+                  <FileUpload/>
+                </Button>
+              </label> <span className={classes.filename}>{values.image ? values.image.name : ''}</span><br/>
+              
                 <TextField type="text" id="business_name" name="business_name" label='Business Name' className={classes.textField}
                             value={values.business_name}
                             onChange={handleChange('business_name')}
@@ -175,8 +202,8 @@ export default function NewBusiness(){
                 />
                 { values.is_business_registered === true && (
                     <div>
-                        <input accept="image/*" onChange={handleChange('business_certificate')} className={classes.input} id="icon-button-file" type="file" />
-                        <label htmlFor="icon-button-file">
+                        <input accept="image/*" onChange={handleBusinessCert('business_certificate')} className={classes.input} id="icon-button-file-one" type="file" />
+                        <label htmlFor="icon-button-file-one">
                             <Button variant="contained" color="secondary" component="span">
                             Upload Business Certificate
                             <FileUpload/>
@@ -188,16 +215,16 @@ export default function NewBusiness(){
                 {
                     !values.is_business_registered && (
                         <div>
-                            <input accept="image/*" onChange={handleChange('identity_card_front')} className={classes.input} id="icon-button-file" type="file" />
-                            <label htmlFor="icon-button-file">
+                            <input accept="image/*" onChange={handleIdCardFront('identity_card_front')} className={classes.input} id="icon-button-file-two" type="file" />
+                            <label htmlFor="icon-button-file-two">
                                 <Button variant="contained" color="secondary" component="span">
                                 Upload an ID Card Front
                                 <FileUpload/>
                                 </Button>
                             </label> <span className={classes.filename}>{values.identity_card_front ? values.identity_card_front.name : ''}</span><br/>
                          
-                         <input accept="image/*" onChange={handleChange('identity_card_back')} className={classes.input} id="icon-button-file" type="file" />
-                              <label htmlFor="icon-button-file">
+                         <input accept="image/*" onChange={handleIdCardBack('identity_card_back')} className={classes.input} id="icon-button-file-three" type="file" />
+                              <label htmlFor="icon-button-file-three">
                                   <Button variant="contained" color="secondary" component="span">
                                   Upload an ID Card Back
                                   <FileUpload/>

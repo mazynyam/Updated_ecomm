@@ -45,7 +45,7 @@ const ShopSchema = new mongoose.Schema({
     },
     is_business_registered:{
         type:Boolean,
-        required:true
+        default:false
     },
     busines_certificate:{
         data:Buffer,

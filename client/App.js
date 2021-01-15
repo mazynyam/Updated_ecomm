@@ -5,9 +5,10 @@ import { ThemeProvider } from '@material-ui/styles'
 import theme from './theme'
 import { hot } from 'react-hot-loader'
 import './App.css'
-import './admin/scss/style.scss'
-
-
+import './scss/style.scss'
+import './components/chatbutton.css'
+import './components/infobar.css'
+import './components/Message.css'
 
 const App = () => {
   React.useEffect(() => {

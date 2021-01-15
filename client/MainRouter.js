@@ -24,51 +24,33 @@ import Order from './order/Order'
 import PlaceARequestForm from './request/PlaceARequestForm'
 import Footer from './core/Footer'
 import MyProducts from './product/MyProducts'
-import Chat from './chat/Chat'
+import Chat from './components/Chat'
+import queryString from 'query-string'
+import VerifyEmail from './components/VerifyEmail'
 
-
-const Loading = () =>{
-  return(
-  <div className="lds-roller">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <p>Loading</p>
-    </div>
-  )
-}
-
-const TheLayout = React.lazy(() => import('./admin/containers/TheLayout'))
-
+// Containers
+// import TheLayout from './containers/TheLayout'
 // Pages
-import Login from './admin/views/pages/login/Login'
-import Register from './admin/views/pages/register/Register'
-import Page404 from'./admin/views/pages/page404/Page404'
-import Page500 from'./admin/views/pages/page500/Page500'
-// const Dashboard = React.lazy(() => import('./admin/views/dashboard/Dashboard'))
+import Login from './views/pages/login/Login'
+import Register from './views/pages/register/Register'
+
 
 const MainRouter = (props) => {
   
   return (
       <>
       <div>
-      <React.Suspense fallback={Loading}>
+     
         <Header/>
+   
+          
+       
         <Switch>
         <Route exact path="/" component={Home}/>
         <Route path="/users" component={Users}/>
         <Route path="/user/signup" component={Signup}/>
         <Route path="/auth/signin" component={Signin}/>
-        <Route path="/auth/admin/signin" component={Login}/>
-        <Route path="/admin/404" component={Page404}/>
-        <Route path="/admin/500" component={Page500}/>
-        <Route path="/admin/signup" component={Register}/>
-
+        
         <PrivateRoute path="/user/edit/:userId" component={EditProfile}/>
         <Route path="/user/:userId" component={Profile}/>
         <Route path='/place-request/get-started' component={PlaceARequestForm} />
@@ -78,8 +60,8 @@ const MainRouter = (props) => {
         <Route path="/shops/all" component={Shops}/>
         <Route path="/shops/:shopId" component={Shop}/>
 
-        <Route path="/chat" component={Chat} />
-
+        <Route path="/" component={Chat} />
+        <Route path='/verify-email' component={VerifyEmail} />
         <Route path="/order/:orderId" component={Order}/>
         <PrivateRoute path="/seller/orders/:shop/:shopId" component={ShopOrders}/>
 
@@ -90,11 +72,14 @@ const MainRouter = (props) => {
         <PrivateRoute path="/seller/:shopId/:productId/edit" component={EditProduct}/>
 
         <Route path="/seller/stripe/connect" component={StripeConnect}/>
-        <AdminPrivateRoute path="/kiriikou-admin" component={TheLayout} />
-        <AdminPrivateRoute path="/admin/users" component={Users} />
-        <AdminPrivateRoute path='/admin/products/all' component={MyProducts} />
-      </Switch>
-      </React.Suspense>
+
+
+          <Route path="/auth/admin/signin" name='Sign In' render={props => <Login {...props} /> }/>
+          <Route path="/auth/admin/register" render={props => <Register {...props} /> } /> 
+          {/* <Route path='/admin' render={props => <TheLayout {...props} />} /> */}
+          
+        </Switch>
+    
 
     </div>
       <div id="sitewrapper" >

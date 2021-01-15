@@ -19,6 +19,11 @@ const signin = async (req, res) => {
           error: "Email and password don't match."
         })
       }
+      if(!user.isVerified){
+        return res.status(401).json({
+          error:'Not verified, Please verify your account'
+        })
+      }
 
       const token = jwt.sign({
         _id: user._id
@@ -62,12 +67,44 @@ const hasAuthorization = (req, res, next) => {
 }
 
 const AdminSignin = async(req, res, next)=>{
-  if(req.user && req.user.isAdmin === true){
-    next()
-  }
-  else{
-    res.status(401)
-    throw new Error('Not authorized')
+  try {
+    let user = await User.findOne({
+        "email": req.body.email,
+        "isAdmin":req.body.isAdmin
+      })
+
+      if (!user)
+        return res.status('401').json({
+          error: "User not found"
+        })
+
+      if (!user.authenticate(req.body.password)) {
+        return res.status('401').send({
+          error: "Email and password don't match."
+        })
+      }
+      if(!user.authenticate(req.body.isAdmin)){
+        return res.status('401').send({
+          error:'Not authorized'
+        })
+      }
+
+      const token = jwt.sign({
+        _id: user._id
+      }, config.jwtSecret)
+
+      res.cookie("t", token, {
+        expire: new Date() + 9999
+      })
+
+      return res.json({
+        token,
+        user: {_id: user._id, name: user.name, email: user.email,  isAdmin: user.isAdmin}
+      })
+  } catch (err) {
+    return res.status('401').json({
+      error: "Could not sign in"
+    })
   }
 }
 export default {

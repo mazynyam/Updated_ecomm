@@ -54,7 +54,7 @@ export default function Signin(props) {
     error: '',
     redirectToReferrer: false
   })
-  const name = 'Sign In';
+ 
 
   const clickSubmit = () => {
     const user = {
@@ -67,12 +67,7 @@ export default function Signin(props) {
         setValues({ ...values, error: data.error})
       } else {
         auth.authenticate(data, () => {
-          if(user.isVerified === true){
-            setValues({ ...values, error: '',redirectToReferrer: true})
-          }
-          else{
-            return( <Redirect to='/verify-email' />)
-          }
+          setValues({ ...values, error: '',redirectToReferrer: true})
         })
       }
     })

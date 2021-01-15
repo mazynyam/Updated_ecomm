@@ -67,7 +67,7 @@ export default function Signup() {
       name: values.name || undefined,
       email: values.email || undefined,
       password: values.password || undefined,
-      phone: values.password || undefined,
+      phone: values.phone || undefined,
       emailToken:values.emailToken,
       isVerified:values.isVerified
     }

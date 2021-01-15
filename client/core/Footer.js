@@ -2,6 +2,8 @@ import React from 'react';
 import logo from './../assets/images/kik.png';
 import {Link, withRouter} from 'react-router-dom'
 import { fade, makeStyles } from '@material-ui/core/styles';
+import ChatButton from './../components/ChatButton'
+import Chat from './../components/Chat'
 
 const useStyles = makeStyles((theme) => ({
 textColor:{
@@ -37,6 +39,8 @@ textkou:{
 function Footer() {
     const classes = useStyles();
     return(
+        <>
+        <Chat />
     <div className="footer">
         <div className="container-fluid">
             <div className="row justify-content-right ml-5 ">   
@@ -45,7 +49,8 @@ function Footer() {
                     Kiriikou.com<img src={logo} alt='Logo' width='40' height='30'/>  <div className=" mt-0">Online Shop</div>
                 </Link>
              
-            </div>          
+            </div>   
+
                 <div className="ml-5"  className={classes.textbar} >
                 
                     <address>
@@ -61,12 +66,8 @@ function Footer() {
 		              <i className="fa fa-fax fa-lg"></i>: +233 0987563456
 		              <i className="fa fa-envelope fa-lg"></i>: <a href="mailto:kiriikou@gmail.com">
                          kiriikou@gmail.com</a></span></h6>
-		             
-
                        
                      </div>
-          
-        
            
                 <div className="text-left ml-5"  className={classes.textbar}>
                 <h6>Follow Us:
@@ -80,9 +81,16 @@ function Footer() {
                     <p>&copy; Copyright { new Date().getUTCFullYear() } Kiriikou</p>
                 </div>
                 </div>
+                <div className="button">
+                  <div className="myForm" >
+                      <button className="floating-btn" id='myForm' onClick={()=>document.getElementById("myForm").style.display = "block"} >
+                          <i className="fas fa-comments 4x"></i>
+                      </button>
+                  </div>
+          </div>
         </div>
     </div>
- 
+ </>
             )
     }
 

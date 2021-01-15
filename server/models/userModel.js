@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import crypto from 'crypto'
+
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -52,7 +53,8 @@ const UserSchema = new mongoose.Schema({
     type:String
   },
   isVerified:{
-    type:Boolean
+    type:Boolean,
+    default:false
   },
   resetPasswordToken:{
     type:String

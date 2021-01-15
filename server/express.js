@@ -8,27 +8,27 @@ import compress from 'compression'
 import cors from 'cors'
 import helmet from 'helmet'
 import Template from './../template'
+
 import userRoutes from './routes/user.routes'
 import authRoutes from './routes/auth.routes'
 import shopRoutes from './routes/shop.routes'
 import productRoutes from './routes/product.routes'
 import orderRoutes from './routes/order.routes'
 import Chat from './models/chatModel'
-import queryString from 'querystring'
 
 // modules for server side rendering
 import React from 'react'
-// import ReactDOMServer from 'react-dom/server'
-import { renderToStringAsync } from 'react-async-ssr'
+import ReactDOMServer from 'react-dom/server'
+// import { renderToStringAsync } from 'react-async-ssr'
 import MainRouter from './../client/MainRouter'
-import { StaticRouter } from 'react-router-dom'
+import {  StaticRouter , Switch} from 'react-router-dom'
 import config from './../config/config'
 import { ServerStyleSheets, ThemeProvider } from '@material-ui/styles'
 import theme from './../client/theme'
 //end
 
 //comment out before building for production
-// import devBundle from './devBundle'
+import devBundle from './devBundle'
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./../client/chat/users')
 
@@ -38,7 +38,7 @@ const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 //comment out before building for production
-// devBundle.compile(app)
+devBundle.compile(app)
 
 // parse body params and attache them to req.body
 app.use(bodyParser.json())
@@ -59,51 +59,24 @@ app.use(session({
 app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 
 io.on('connection', socket => {
-  console.log('New connection!!!');
+  console.log('New connection made!');
+  socket.on('chat', ({name, shop}, callback)=>{
+    const { error, user} = addUser({ id: auth.isAuthenticated().user._id || socket.id, name: auth.isAuthenticated().user.name || 'Anonymous', shop})
+    if(error) return callback(error);
 
-  socket.on('join',({name, room}, callback) =>{
-    // try{
-    //   let chat = new Chat({message: msg.chatMessage, sender:msg.userId, type:msg.type})
-    //   chat.save((err,doc)=>{
-    //     if(err)return res.json({ success:false, err})
-    //     Chat.find({"_id":doc._id})
-    //     .populate("sender")
-    //     .exec((err, doc)=>{
-    //       return io.emit("Output Chat Message", doc)
-    //     })
-    //   })
-    // }
-    // catch(error){
-    //   console.error(error)
-    // }
+    socket.emit('message', {user:'Kiriikou', text:`Welcome to Kiriikou Support`})
+    socket.broadcast.to(user.shop).emit('message', { user:'admin', text:`${user.name} has joined!`})
+    socket.join(user.shop)
+    callback();
+  });
 
-    const {error, user} = addUser({id: auth.authenticated().user._id, name:auth.authenticated().user.name, room})
-    if(error) return callback(error)
-
-    socket.emit('message', { user: 'admin', text:`${auth.isAuthenticated().user.name}, Welcome to Kiriikou Customer Support Center`});
-    socket.broadcast.to(user.room).emit('message', {user:'admin', text:`${auth.isAuthenticated().user.name}  joined`});
-
-    socket.join(user.room)
+  socket.on('sendMessage',(message, callback) => {
+    const user = getUser(socket.id)
+    io.to(user.shop).emit('message', { user: auth.isAuthenticated().user.name, text:message })
     callback()
-    
-  })
-  socket.on('sendMessage', (message, callback)=>{
-    const chat = new Chat()
-    io.to(chat.room).emit('message', { chat:chat.sender, text: message })
-    try {
-      chat.save((err, doc)=>{
-        if(err)return res.json({ success: false, err})
-        Chat.find({"_id": doc._id})
-        .populate(sender)
-        .exec((err, doc)=>{
-          return io.emit('chat message', doc);
-        })
-      })
-    } catch (error) {
-      console.error(error)
-    }
-    callback()
-  })
+
+  });
+
   socket.on('disconnect', ()=>{
     console.log('User has left')
   })
@@ -122,20 +95,9 @@ app.get('*', (req, res) => {
   const context = {}
   let name;
   name = 'Home'
-  // const checkTitle = (req, res)=>{
-  //   switch (name) {
-  //     case queryString.location === `${req.headers.host}/auth/signin`:
-  //       name = 'Login'
-  //       case queryString.location ===  `${req.headers.host}'/user/signup`:
-  //       name = 'Register'
-  //     default:
-  //       name = 'Home'
-  //       break;
-  //   }
-  // }
-  // checkTitle(name)
+ 
 
-  const  markup =  renderToStringAsync  (
+  const  markup =  ReactDOMServer.renderToString (
     sheets.collect(
       <StaticRouter location={req.url} context={context}>
           <ThemeProvider theme={theme}>
@@ -147,13 +109,15 @@ app.get('*', (req, res) => {
     if (context.url) {
       return res.redirect(303, context.url)
     }
-    
+
     const css = sheets.toString()
     res.status(200).send(Template({
       markup: markup,
       css: css,
       name: name
     }))
+  
+    
 })
 
 // Catch unauthorised errors

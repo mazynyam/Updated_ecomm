@@ -5,51 +5,49 @@ import request from 'request'
 import config from '../../config/config'
 import stripe from 'stripe'
 import sgmail from '@sendgrid/mail'
+import crypto from 'crypto'
+import nodemailer from 'nodemailer'
+import {signin} from './../../client/auth/api-auth'
 
 const myStripe = stripe(config.stripe_test_secret_key)
 sgmail.setApiKey(config.sendgrid_api_key)
 const create = async (req, res) => {
   const user = new User(req.body)
-  try {
-    await user.save()
-    const msg = {
-      from:`${config.email_address}`,
-      to:user.email,
-      subject:'Kiriikou - Verify your email',
-      text:`Thank you for registering with us.
-      Please click on the link to verify your account.
-      http://${req.headers.host}/verify-email?${user.emailToken}`,
-      html:`
-      <h1>Hello ${user.name}</h1>
-      <p>
-      Thank you for registering with us.
-      Please click on the link to verify your account.
-      http://${req.headers.host}/verify-email?${user.emailToken}
-      </p>
-      `
+    
+    try {
+      await user.save()
+      let transporter = nodemailer.createTransport({service:'Sendgrid', auth: {user: config.SENDGRID_USERNAME, pass:config.SENDGRID_PASSWORD }})
+      const msg = {
+        from:`${config.email_address}`,
+        to:user.email,
+        subject:'Kiriikou - Verify your email',
+        text:`Thank you for registering with us.
+        Please click on the link to verify your account.
+        http://${req.headers.host}/verify-email?${token.emailToken}`,
+        html:`
+        <h1>Hello ${user.name}</h1>
+        <p>
+        Thank you for registering with us.
+        Please click on the link to verify your account.
+        http://${req.headers.host}/verify-email?${user.emailToken}
+        </p>
+        `
+      
+        }
+      transporter.sendMail(msg, function(err){
+        res.status(200).json({msg:'A verification email has been sent to ' +user.email}) 
+    })
+      return res.status(200).json({
+        message: "Successfully signed up!"
+      })
+    } catch (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
     }
-    (async()=>{
-      try {
-        await sgmail.send(msg)
-        req.flash('success', 'Thanks for registering. Please check your email to verify your accouny')
-        res.redirect('/')
-      } catch (error) {
-        console.log(error)
-        req.flash('error', 'Something went wrong, Please contact support@kiriikou.com')
-        req.redirect('/')
-      }
-    })();
-    return res.status(200).json({
-      message: "Successfully signed up!"
-    })
-  } catch (err) {
-    return res.status(400).json({
-      error: errorHandler.getErrorMessage(err)
-    })
+
   }
- 
-  
-}
+
 const resetPassword = async(req, res, next)=>{
   async.waterfall([
     function(done) {
@@ -91,12 +89,12 @@ const resetPassword = async(req, res, next)=>{
       (async()=>{
         try {
           await sgmail.send(msg)
-          req.flash('success', `A Password Reset sent to ${user.email} `)
+          res.json({'success':`A Password Reset sent to ${user.email} `})
           done(err, 'done')
           res.redirect('/')
         } catch (error) {
           console.log(error)
-          req.flash('error', 'Something went wrong, Please contact support@kiriikou.com')
+          res.json({'error': 'Something went wrong, Please contact support@kiriikou.com'})
           req.redirect('/')
         }
       })();
@@ -110,19 +108,29 @@ const verifyEmail = async(req, res, next)=>{
   try {
     const user = await User.findOne({ emailToken: req.query.token })
     if(!user){
-      req.flash('error', 'Token is invalid, Please contact for assistance')
+      req.json({'error': 'Token is invalid, Please contact for assistance'})
       return res.redirect('/')
     }
     user.emailToken = null;
     user.isVerified = true;
     await user.save()
-    await req.login(user, async(err)=>{
-      if(err) return next(err)
-      req.flash('success', `Welcome to Kiriikou B2B Ecommerce ${user.name}`)
-      const rediretUrl = req.session.redirectTo || '/';
-      delete req.session.redirectTo;
-      res.redirect(rediretUrl)
+    // signin(user, (err)=>{
+    //   if(err) return next(err)
+    //   res.json('success', `Welcome to Kiriikou B2B Ecommerce ${user.name}`)
+    //   const rediretUrl = req.session.redirectTo || '/';
+    //   delete req.session.redirectTo;
+    //   res.redirect(rediretUrl)
+    // })
+    await req.signin(user).then((data) => {
+      if (!data) {
+        next()
+      } else {
+        const redirectUrl = req.session.redirectTo || '/';
+        delete req.session.redirectTo
+        res.redirect(redirectUrl)
+      }
     })
+
   } catch (error) {
     console.log(error)
     req.flash('error', 'Something went wrong, Please contact for assistance')

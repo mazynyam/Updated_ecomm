@@ -92,7 +92,7 @@ export default function Home(){
   })
 
   const [showInfo, setShowInfo]= useState(false)
-
+  
     return (
 
           <div className={classes.root}>
@@ -138,13 +138,6 @@ export default function Home(){
             </Grid>
             <RequestForQuotation />
       
-          <div className="button">
-                  <div className="icon">
-                      <button className="floating-btn" onClick={() => { setShowInfo(!showInfo)}} >
-                          <i className="fas fa-comments 4x"></i>
-                      </button>
-                  </div>
-          </div>
         </div>
 
 

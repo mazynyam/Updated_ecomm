@@ -25,14 +25,20 @@ const config = {
                 use: 'file-loader'
             },
             {
-                test: /\.css$/,
+                test: /\.css$/i,
                 use: [
-                  'style-loader',
-                  'css-loader'
-                ]
+                  {loader:'style-loader',
+                  
+                },
+                {
+                    loader:'css-loader',
+                    
+            },
+                ],
             },
             {
-                test: /\.s[ac]ss$/i,
+                test: /\.scss$/i,
+                
                 use: [
                 // Creates `style` nodes from JS strings
                 "style-loader",
@@ -40,8 +46,13 @@ const config = {
                 "css-loader",
                 // Compiles Sass to CSS
                 "sass-loader",
-            ],}
+            ],
+            
+        }
         ]
+    },
+    resolve: {
+        extensions: [".tsx", ".ts", ".js", "scss"]
     },
     
 }
