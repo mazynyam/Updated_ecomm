@@ -10,23 +10,25 @@ import {read, listRelated} from './api-product.js'
 import {Link} from 'react-router-dom'
 import Suggestions from './../product/Suggestions'
 import AddToCart from './../cart/AddToCart'
+import { fade } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     margin: 30,
   },
-  flex:{
-    display:'flex'
-  },
+  // flex:{
+  //   display:'flex'
+  // },
   card: {
-    padding:'24px 40px 40px'
+    padding:'24px 40px 40px',
+    marginBottom:'300px',
   },
-  subheading: {
-    margin: '24px',
-    // color: theme.palette.openTitle
-    color:'#17293d'
-  },
+  // subheading: {
+  //   margin: '24px',
+  //   // color: theme.palette.openTitle
+  //   color:'#17293d'
+  // },
   price: {
     padding: '16px',
     margin: '16px 0px',
@@ -41,33 +43,39 @@ const useStyles = makeStyles(theme => ({
     
 
   },
-  media: {
-    height: 200,
-    display: 'inline-block',
-    width: '50%',
-    marginLeft: '24px',
+  // media: {
+  //   height: 300,
+  //   display: 'inline-block',
+  //   width: '50%',
+  //   marginLeft: '24px',
     
-  },
+  // },
   icon: {
     verticalAlign: 'sub',
-    color:'#ACD523'
+    color:'#acd523',
+    '&:hover': {
+      color: fade('#acd523', 0.8),
+      },
+    fontSize:'18px',
+    fontFamily:"Arial Black",
+    fontWeight:"bolder",
   },
   link:{
     color: '#3e4c54b3',
-    fontSize: '0.9em'
+    fontSize: '0.9em',
+    '&:hover': {
+      color: fade('#acd523', 0.8),
+      },
   },
   addCart: {
-    width: '70px',
-    height: '35px',
-    // padding: '5px 0px',
+    width: '34px',
+    height: '25px',
+   
     borderRadius: '0.25em',
     backgroundColor: '#17293d',
     color:"#ACD523"
   },
-  action: {
-    margin: '8px 24px',
-    display: 'inline-block'
-  }
+ 
 }))
 
 export default function Product ({match}) {
@@ -114,29 +122,30 @@ export default function Product ({match}) {
     return (
         <div className={classes.root}>
           <Grid container spacing={10}>
-            <Grid item xs={7} sm={7}>
+            <Grid item xs={12} sm={12} md={12} lg={7} xl={7}>
               <Card className={classes.card}>
                 <CardHeader
                   title={product.name}
                   subheader={product.quantity > 0? 'In Stock': 'Out of Stock'}
                   action={
-                    <span className={classes.action}>
-                    Add to cart  <AddToCart cartStyle={classes.addCart} item={product}/>
+                    <span id="myaction">
+                     <span> <AddToCart cartStyle={classes.addCart} item={product}/></span>
                     </span>
                   }
                 />
-                <div className={classes.flex}>
+                <div id="myflex">
                   <CardMedia
-                    className={classes.media}
+                  id="mymedia"
                     image={imageUrl}
                     title={product.name}
                   />
-                  <Typography component="p" variant="subtitle1" className={classes.subheading}>
+                  <Typography component="p" variant="subtitle1" id="mysubheading">
                     {product.description}<br/>
                     <span className={classes.price}>$ {product.price}</span>
                     <Link to={'/shops/'+product.shop._id} className={classes.link}>
-                      <span>
-                        <Icon className={classes.icon}>shopping_basket</Icon> {product.shop.business_name}
+                      <span className={classes.icon}>
+                        {/* <Icon className={classes.icon}>shopping_basket</Icon> {product.shop.business_name} */}
+                        Contact Supplier {product.shop.business_name}
                       </span>
                     </Link>
                   </Typography>

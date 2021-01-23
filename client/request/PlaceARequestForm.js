@@ -6,11 +6,18 @@ import create from './api-request'
 
 const useStyles = makeStyles(theme => ({
     card: {
-      maxWidth: 600,
+      maxWidth: 800,
       margin: 'auto',
       textAlign: 'center',
       marginTop: theme.spacing(5),
-      paddingBottom: theme.spacing(2)
+      paddingBottom: theme.spacing(2),
+      // marginBottom:'200px',
+    },
+    ordhere:{
+      color:"#acd523",
+     fontFamily:"Arial Black",
+      fontWeight:"bolder",
+      fontSize:"20px"
     },
     menu: {
       width: 200,
@@ -26,11 +33,17 @@ const useStyles = makeStyles(theme => ({
     textField: {
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
-      width: 300
+      width: 300,
     },
     submit: {
       margin: 'auto',
-      marginBottom: theme.spacing(2)
+      // marginBottom: theme.spacing(2),
+      marginBottom:"200px",
+      color:"white",
+      backgroundColor:"#acd523",
+      fontWeight:"bolder",
+      fontSize:"20px",
+      fontFamily:"Arial Black",
     },
     input: {
       display: 'none'
@@ -88,7 +101,7 @@ export default function PlaceARequestForm() {
         <div>
             <Card className={classes.card}>
             <CardContent>
-                <Typography type='headline' component='h2'>Place Order Here</Typography>
+                <Typography type='headline' className={classes.ordhere} component='h2'>Place Your Order Here</Typography>
                     <TextField type='text' name='name' className={classes.textField} label='Fullname' onChange={handleChange('name')} value={values.name} />
                     <TextField type='text' name='country' className={classes.textField}label='Country' onChange={handleChange('country')} value={values.country} />
                     <TextField type='text' name='city'className={classes.textField} label='City' onChange={handleChange('city')} value={values.city} />
@@ -100,7 +113,7 @@ export default function PlaceARequestForm() {
                     <TextField type='type' name='customization' onChange={handleChange('customization')} value={values.customization} className={classes.textField} label='Customization' /> <br /> <br />
                     <input accept="image/*" onChange={handleChange('image')} value={values.image ? values.image.name : ''} className={classes.input} id="icon-button-file" type="file"/>
                     <label htmlFor="icon-button-file">
-                        <Button variant="contained" color="secondary" component="span">
+                        <Button variant="contained" style={{backgroundColor:'#acd523',fontWeight:"bolder"}} component="span">
                           Add Pictures for actual items 
                         <FileUpload/>
                         </Button>
@@ -109,7 +122,7 @@ export default function PlaceARequestForm() {
           
                </CardContent>
                <CardActions>
-                    <Button color="primary" variant="contained" onClick={clickSubmit}  className={classes.submit}>Submit</Button>
+                    <Button  variant="contained" onClick={clickSubmit}  className={classes.submit}>Submit</Button>
                     {/* <Link to={'/seller/shop/edit/'} className={classes.submit}><Button variant="contained">Cancel</Button></Link> */}
                 </CardActions>
             </Card>

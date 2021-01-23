@@ -9,12 +9,13 @@ import  {SLIDE_INFO} from '../components/SlideConstant'
 import { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption } from 'reactstrap'
 import RequestForQuotation from './../components/RequestForQuotation'
 
-
+import Footer from '../core/Footer'
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     margin: 30,
+    marginBottom:38,
   },
   
   
@@ -94,26 +95,26 @@ export default function Home(){
   const [showInfo, setShowInfo]= useState(false)
   
     return (
-
+<>
           <div className={classes.root}>
             <Grid container spacing={2}>
               <Grid>
                   <Search categories={categories}/>
                 </Grid>
-                <Grid item xs={2} sm={2}>    
+                <Grid item xs={3} sm={1} md={1} lg={2} xl={1}>    
                 <h6 id="moneycolour"><span className="fa fa-money fa-lg" id="sellcolour"></span> Make money on Kiriikou</h6>
                 </Grid>
-                <Grid item xs={2} sm={2}>
+                <Grid item xs={3} sm={1} md={1} lg={2} xl={1} >
                 <h6 id="trust"><span className="fa fa-shopping-bag fa-lg" id="trt"></span> Shop with trust</h6>
                 </Grid>
-                <Grid item xs={2} sm={2}>
+                <Grid item xs={3} sm={1} md={1} lg={2} xl={1} >
                 <h6 id="support"><span className="fa fa-clock-o fa-lg" id="supp"></span>24/7 Support</h6>
                 </Grid>
-                <Grid item xs={2} sm={2}>
+                <Grid item xs={3} sm={1} md={1} lg={2} xl={1} >
                 <h6 id="payment"><span className="fa fa-credit-card fa-lg" id="paynt"></span>Secure Payment</h6>
                 </Grid>
               
-                <Grid item xs={8}>
+                <Grid item xs={12} sm={12}  md={6} lg={8} xl={6}>
                   <Carousel 
                   activeIndex={activeIndex}
                   next={next}
@@ -126,20 +127,25 @@ export default function Home(){
                 </Carousel>
               
               </Grid>
-                  <Grid  item xs={4} sm={4}>
+                  <Grid  item xs={12} sm={12}  md={6} lg={4} xl={4}>
                     <Suggestions  products={suggestions} title={suggestionTitle}/>
                   </Grid>
                   
-                    <Grid item xs={12}>
+                    <Grid item  xs={12} sm={12}  md={12} lg={12} xl={12}>
                       <Categories categories={categories}/>
                     </Grid>
                     
             
             </Grid>
+            <div>
             <RequestForQuotation />
+            </div>
+
+           
       
         </div>
-
+         
+</>
 
     )
 }

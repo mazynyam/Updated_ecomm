@@ -18,6 +18,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import auth from './../auth/auth-helper'
 import {Link, withRouter} from 'react-router-dom'
 import logo from './../assets/images/kik.png';
+import loggo from './../assets/images/ekiri.jpg';
 // import Search from './../product/Search'
 import {  list, listCategories } from './../product/api-product'
 // import Products from './../product/Products'
@@ -25,16 +26,43 @@ import {  list, listCategories } from './../product/api-product'
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
+   
   },
+  brp: {
+    height:"63px",
+    marginBottom:"0px",
+    backgroundColor:"#17293d",
+//     borderStyle: "none none solid none",
+//     borderColor:"#17293d",
+// borderWidth:"7px"
+   
+  },
+//   kimg:{
+// height:"55px",
+// width:"210px",
+// justifyContent:"center",
+// marginBottom:"20px"
+//   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   textColor:{
-    color:'#f4f4f4',
-    listStyle:'none'
+    listStyle:'none',
+    color:' #acd523',
+    listStyle:'none',
+    '&:hover': {
+       color: fade('#acd523', 0.8),
+       },
+       marginRight:"0px",
+  },
+  signColor:{
+    color:' #acd523',
+   '&:hover': {
+       color: fade('#acd523', 0.8),
+       },
   },
   title: {
-    display: 'none',
+    // display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
@@ -53,8 +81,10 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(3),
       width: 'auto',
     },
+     color:' #acd523',
   },
   searchIcon: {
+    color:' #acd523',
     padding: theme.spacing(0, 2),
     height: '100%',
     position: 'absolute',
@@ -92,16 +122,16 @@ const useStyles = makeStyles((theme) => ({
 
 const  isActive = (history, path) =>{
     if(history.location.pathname.includes(path))
-    return { color: '#bef67a'}
+    return { color: '#acd523'}
     else{
-        return { color: '#d7ff9a'}
+        return { color: '#acd523'}
     }
 }
 const isPartActive = (history, path) => {
     if (history.location.pathname.includes(path))
-      return {color: '#bef67a'}
+      return {color: '#acd523'}
     else
-      return {color: '#bef67a'}
+      return {color: '#acd523'}
     
 }
 /**
@@ -271,13 +301,14 @@ const Header = withRouter(({history}) =>{
   
     return (
       <div className={classes.grow}>
-        <AppBar position="static">
+        <AppBar position="static" className={classes.brp}>
           <Toolbar>
             
             <Typography className={classes.title} variant="h6" noWrap>
-              <Link to='/' className={classes.textColor}>
-              <img src={logo} alt='Logo' height='50'  />
-              Kiriikou.com
+              <Link to='/' className={classes.textColor} id="bestft">
+              <img src={logo} alt='Logo' height='50' className={classes.kiimg} />
+              <img src={loggo} alt='Logo' height='50' id="kimg" />
+              
               </Link>
             </Typography>
             
@@ -285,11 +316,11 @@ const Header = withRouter(({history}) =>{
             <div className={classes.sectionDesktop}>
             {
             !auth.isAuthenticated() && (<span>
-              <Link to="/user/signup">
+              <Link to="/user/signup" className={classes.signColor}>
                 <Button style={isActive(history, "/user/signup")}>Sign up
                 </Button>
               </Link>
-              <Link to="/auth/signin">
+              <Link to="/auth/signin" className={classes.signColor}>
                 <Button style={isActive(history, "/auth/signin")}>Sign In
                 </Button>
               </Link>

@@ -7,6 +7,7 @@ import GridListTile from '@material-ui/core/GridListTile'
 import GridListTileBar from '@material-ui/core/GridListTileBar'
 import {Link} from 'react-router-dom'
 import AddToCart from './../cart/AddToCart'
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,57 +35,51 @@ const useStyles = makeStyles(theme => ({
   
   },
   tile: {
-    textAlign: 'center'
+    textAlign: 'left'
   },
-  image: {
-    height: '80%',
+  // supimage: {
+  //   height: '80%',
     
-  },
-  tileBar: {
-    // backgroundColor: 'rgba(0, 0, 0, 0.72)',
-    backgroundColor: '#17293d',
-    height:"48px",
-    textAlign: 'left',
-    marginTop:"40px",
     
-  },
-  tileTitle: {
-    fontSize:'1.0em',
-    marginBottom:'5px',
-    // color:'rgb(189, 222, 219)',
-    color:'#fff',
-    display:'block',
-   
-  },
+  // },
   
-  priceTitle: {
-    fontSize:'1.4em',
-   
-    // color:'rgb(189, 222, 219)',
-    color:'#fff',
-    
-    
-    
-  },
+  
   
 }))
 
 export default function Products(props){
   const classes = useStyles()
+  const getGridListCols = () => {
+    if (isWidthUp('xl', props.width)) {
+      return 3;
+    }
+
+    if (isWidthUp('lg', props.width)) {
+      return 3;
+    }
+
+    if (isWidthUp('xs', props.width)) {
+      return 1;
+    }
+    if (isWidthUp('sm', props.width)) {
+      return 1;
+    }
+    return 3;
+  }
     return (
       <div className={classes.root}>
       {props.products.length > 0 ?
         (<div className={classes.container}>
-          <GridList cellHeight={200} className={classes.gridList} cols={3}>
+          <GridList cellHeight={200} className={classes.gridList} cols={getGridListCols()}>
           {props.products.map((product, i) => (
             <GridListTile key={i} className={classes.tile}>
-              <Link to={"/product/"+product._id}><img className={classes.image} src={'/api/product/image/'+product._id} alt={product.name} /></Link>
-              <GridListTileBar className={classes.tileBar}
-                title={<Link to={"/product/"+product._id} className={classes.tileTitle}>{product.name}</Link>}
-                subtitle={<span className={classes.priceTitle}>$ {product.price}</span>}
-                actionIcon={
-                  <AddToCart item={product}/>
-                }
+              <Link to={"/product/"+product._id}><img id="supimage" src={'/api/product/image/'+product._id} alt={product.name} /></Link>
+              <GridListTileBar id="mytilebar"
+                title={<Link to={"/product/"+product._id} id="tileTitle">{product.name}</Link>}
+                subtitle={<span id="priceTitle">$ {product.price}</span>}
+                // actionIcon={
+                //   <AddToCart id ="prcart" item={product}/>
+                // }
               />
             </GridListTile>
           ))}

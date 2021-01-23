@@ -13,13 +13,15 @@ import {Redirect} from 'react-router-dom'
 import {signin} from './api-auth.js'
 import { fade} from '@material-ui/core/styles';
 
+import Footer from '../core/Footer'
 const useStyles = makeStyles(theme => ({
   card: {
     maxWidth: 600,
     margin: 'auto',
     textAlign: 'center',
     marginTop: theme.spacing(5),
-    paddingBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(2),
+    marginBottom:200,
   },
   error: {
     verticalAlign: 'middle'
@@ -28,7 +30,8 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(2),
     // color: theme.palette.openTitle
     color:"#ACD523",
-    fontFamily:"Arial Black"
+    fontFamily:"Arial Black",
+    fontSize:"30px",
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -90,6 +93,7 @@ export default function Signin(props) {
   
 
   return (
+    <>
       <Card className={classes.card}>
         <CardContent>
           <Typography variant="h5" className={classes.title}>
@@ -109,7 +113,11 @@ export default function Signin(props) {
         <Link color='primary' to="/forgot">Forgot Password?</Link>
         </CardActions>
       </Card>
+     
+  </>
+
     )
+    
 }
 
 

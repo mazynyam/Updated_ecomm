@@ -12,6 +12,7 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import AddToCart from './../cart/AddToCart'
+import Grid from '@material-ui/core/Grid'
 
 const useStyles = makeStyles(theme => ({
   root: theme.mixins.gutters({
@@ -22,11 +23,12 @@ const useStyles = makeStyles(theme => ({
   title: {
     margin: `${theme.spacing(4)}px 0 ${theme.spacing(2)}px`,
     color: theme.palette.openTitle,
-    color:'#ACD523',
-    fontSize: '2.0em',
-
+    color:'#acd523',
+    fontSize: '1.4em',
+    
+  
     fontFamily:"Arial Black",
-    fontWeight:"bolder",
+    fontWeight:"boldest",
   },
   nowsh: {
     padding:`${theme.spacing(1)}px ${theme.spacing(1)}px ${theme.spacing(1)}px`,
@@ -42,10 +44,10 @@ const useStyles = makeStyles(theme => ({
   viewButton: {
     verticalAlign: 'middle'
   },
-  card: {
-    width: '100%',
-    display: 'inline-flex'
-  },
+  // card: {
+  //   width: '100%',
+  //   display: 'inline-flex'
+  // },
   details: {
     display: 'inline-block',
     width: "100%"
@@ -54,11 +56,11 @@ const useStyles = makeStyles(theme => ({
     flex: '1 0 auto',
     padding: '16px 8px 0px'
   },
-  cover: {
-    width: '65%',
-    height: 130,
-    margin: '8px'
-  },
+  // cover: {
+  //   width: '65%',
+  //   height: 130,
+  //   margin: '8px'
+  // },
   controls: {
     marginTop: '8px'
   },
@@ -108,9 +110,10 @@ export default function Suggestions (props) {
         </Typography>
         {props.products.map((item, i) => {
             return <span key={i}>
-              <Card className={classes.card}>
+         
+              <Card id="sugcard">
                 <CardMedia
-                  className={classes.cover}
+                  id="icover"
                   image={'/api/product/image/'+item._id}
                   title={item.name}
                 />
@@ -139,6 +142,7 @@ export default function Suggestions (props) {
                     </div>
                   </div>
                 </Card>
+              
                 <Divider/>
               </span>
             })

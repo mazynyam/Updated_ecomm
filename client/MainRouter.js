@@ -31,8 +31,8 @@ import VerifyEmail from './components/VerifyEmail'
 // Containers
 // import TheLayout from './containers/TheLayout'
 // Pages
-import Login from './views/pages/login/Login'
-import Register from './views/pages/register/Register'
+// import Login from './views/pages/login/Login'
+// import Register from './views/pages/register/Register'
 
 
 const MainRouter = (props) => {
@@ -74,8 +74,8 @@ const MainRouter = (props) => {
         <Route path="/seller/stripe/connect" component={StripeConnect}/>
 
 
-          <Route path="/auth/admin/signin" name='Sign In' render={props => <Login {...props} /> }/>
-          <Route path="/auth/admin/register" render={props => <Register {...props} /> } /> 
+          {/* <Route path="/auth/admin/signin" name='Sign In' render={props => <Login {...props} /> }/>
+          <Route path="/auth/admin/register" render={props => <Register {...props} /> } />  */}
           {/* <Route path='/admin' render={props => <TheLayout {...props} />} /> */}
           
         </Switch>

@@ -14,7 +14,10 @@ const useStyles = makeStyles(theme => ({
   card: {
     margin: 'auto',
     textAlign: 'center',
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+  // borderColor:"#acd523",
+  // borderStyle:"solid",
+    borderRadius:"60px"
   },
   menu: {
     width: 200,
@@ -22,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 130,
+    width: 126,
     verticalAlign: 'bottom',
     marginBottom: '20px',
     
@@ -30,16 +33,20 @@ const useStyles = makeStyles(theme => ({
   searchField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 200,
+    width: 150,
     marginBottom: '20px',
     color:'#fff'
   },
   searchButton: {
-    minWidth: '20px',
+   width:"5px",
     height: '30px',
-    padding: '0 8px',
-    marginBottom: '20px'
+    padding: '0 5px',
+    marginBottom: '16px',
+    color:"#acd523",
+    marginRight:'20PX',
+  
   }
+
 }))
 
 export default function Search(props) {
@@ -80,7 +87,7 @@ export default function Search(props) {
         <TextField
           id="select-category"
           select
-          label="Select category"
+          label="Shop by category"
           className={classes.textField}
           value={values.category}
           onChange={handleChange('category')}

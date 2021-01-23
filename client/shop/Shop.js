@@ -16,7 +16,8 @@ const useStyles = makeStyles(theme => ({
   },
   card: {
     textAlign: 'center',
-    paddingBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(2),
+    marginBottom:"85px"
   },
   title: {
     margin: theme.spacing(2),
@@ -34,9 +35,11 @@ const useStyles = makeStyles(theme => ({
   },
   productTitle: {
     padding:`${theme.spacing(3)}px ${theme.spacing(2.5)}px ${theme.spacing(1)}px ${theme.spacing(2)}px`,
-    color: theme.palette.openTitle,
+    color: '#acd523',
+    fontFamily:'Arial Black',
     width: '100%',
-    fontSize: '1.2em'
+    fontSize: '1.2em',
+    fontSize:"26px"
   }
 }))
 
@@ -99,7 +102,7 @@ export default function Shop({match}) {
           : '/api/shops/defaultphoto'
     return (<div className={classes.root}>
       <Grid container spacing={8}>
-        <Grid item xs={4} sm={4}>
+        <Grid item xs={12} sm={12} md={12} lg={6} xl={8} >
           <Card className={classes.card}>
             <CardContent>
               <Typography type="headline" component="h2" className={classes.title}>
@@ -117,7 +120,7 @@ export default function Shop({match}) {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={8} sm={8}>
+        <Grid item xs={12} sm={12}  md={12} lg={6} xl={4}>
           <Card>
             <Typography type="title" component="h2" className={classes.productTitle}>Products</Typography>
             <Products products={products} searched={false}/>
